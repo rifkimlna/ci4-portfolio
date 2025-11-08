@@ -5,10 +5,10 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-2xl lg:text-3xl font-bold text-white">Projects</h1>
-            <p class="text-[#A0A0A0] mt-1">Kelola proyek portfolio Anda</p>
+            <h1 class="text-2xl lg:text-3xl font-light text-white">Projects</h1>
+            <p class="text-white/60 mt-1">Kelola proyek portfolio Anda</p>
         </div>
-        <button onclick="openCreateModal()" class="bg-primary text-background-dark px-6 py-3 rounded-lg hover:bg-primary/80 transition-colors font-bold flex items-center gap-2 w-full sm:w-auto justify-center">
+        <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex items-center gap-2 w-full sm:w-auto justify-center">
             <i class="fas fa-plus"></i>
             Tambah Project
         </button>
@@ -30,9 +30,9 @@
     <?php endif; ?>
 
     <!-- Projects Table -->
-    <div class="glassmorphism rounded-xl">
+    <div class="glassmorphism rounded-2xl">
         <div class="p-6 border-b border-white/10">
-            <h2 class="text-xl font-bold text-white">Semua Projects</h2>
+            <h2 class="text-xl font-light text-white">Semua Projects</h2>
         </div>
         <div class="p-6">
             <?php if (!empty($projects)): ?>
@@ -40,9 +40,9 @@
                     <table class="min-w-full">
                         <thead>
                             <tr class="border-b border-white/10">
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Judul</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Teknologi</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Aksi</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Judul</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Teknologi</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-white/10">
@@ -52,10 +52,10 @@
                                         <div class="text-sm font-medium text-white"><?= $project['title'] ?></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-[#A0A0A0]"><?= $project['technologies'] ?></div>
+                                        <div class="text-sm text-white/60"><?= $project['technologies'] ?></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button onclick="openEditModal(<?= htmlspecialchars(json_encode($project)) ?>)" class="text-primary hover:text-primary/80 mr-4">
+                                        <button onclick="openEditModal(<?= htmlspecialchars(json_encode($project)) ?>)" class="text-white hover:text-white/80 mr-4">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>
                                         <form action="/admin/projects/delete/<?= $project['id'] ?>" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus project ini?')">
@@ -74,11 +74,11 @@
             <?php else: ?>
                 <div class="text-center py-12">
                     <div class="glassmorphism rounded-full size-20 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-folder-open text-3xl text-[#A0A0A0]"></i>
+                        <i class="fas fa-folder-open text-3xl text-white/60"></i>
                     </div>
-                    <h3 class="text-white text-lg font-semibold mb-2">Belum ada projects</h3>
-                    <p class="text-[#A0A0A0] mb-4">Tambahkan project pertama Anda untuk ditampilkan di portfolio.</p>
-                    <button onclick="openCreateModal()" class="bg-primary text-background-dark px-6 py-3 rounded-lg hover:bg-primary/80 transition-colors font-bold flex items-center gap-2 mx-auto">
+                    <h3 class="text-white text-lg font-light mb-2">Belum ada projects</h3>
+                    <p class="text-white/60 mb-4">Tambahkan project pertama Anda untuk ditampilkan di portfolio.</p>
+                    <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex items-center gap-2 mx-auto">
                         <i class="fas fa-plus"></i>
                         Tambah Project Pertama
                     </button>
@@ -95,12 +95,12 @@
     
     <!-- Modal Content -->
     <div class="fixed inset-0 flex items-center justify-center p-4">
-        <div class="glassmorphism rounded-xl w-full max-w-2xl max-h-[85vh] overflow-y-auto transform transition-all">
+        <div class="glassmorphism rounded-2xl w-full max-w-2xl max-h-[85vh] overflow-y-auto transform transition-all">
             <!-- Header -->
-            <div class="sticky top-0 glassmorphism rounded-t-xl p-6 border-b border-white/10">
+            <div class="sticky top-0 glassmorphism rounded-t-2xl p-6 border-b border-white/10">
                 <div class="flex items-center justify-between">
-                    <h3 id="modalTitle" class="text-xl font-bold text-white">Tambah Project Baru</h3>
-                    <button onclick="closeModal()" class="text-[#A0A0A0] hover:text-white transition-colors">
+                    <h3 id="modalTitle" class="text-xl font-light text-white">Tambah Project Baru</h3>
+                    <button onclick="closeModal()" class="text-white/60 hover:text-white transition-colors">
                         <i class="fas fa-times text-lg"></i>
                     </button>
                 </div>
@@ -113,73 +113,73 @@
                 
                 <div class="grid grid-cols-1 gap-6">
                     <div>
-                        <label for="title" class="block text-sm font-medium text-[#A0A0A0] mb-2">Judul Project *</label>
+                        <label for="title" class="block text-sm font-medium text-white/70 mb-3">Judul Project *</label>
                         <input type="text" id="title" name="title" required 
-                               class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-[#A0A0A0]"
+                               class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                                placeholder="Nama project Anda">
                     </div>
 
                     <div>
-                        <label for="technologies" class="block text-sm font-medium text-[#A0A0A0] mb-2">Teknologi</label>
+                        <label for="technologies" class="block text-sm font-medium text-white/70 mb-3">Teknologi</label>
                         <input type="text" id="technologies" name="technologies" 
-                               class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-[#A0A0A0]"
+                               class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                                placeholder="React, Node.js, MongoDB, etc.">
                     </div>
 
                     <div>
-                        <label for="description" class="block text-sm font-medium text-[#A0A0A0] mb-2">Deskripsi *</label>
+                        <label for="description" class="block text-sm font-medium text-white/70 mb-3">Deskripsi *</label>
                         <textarea id="description" name="description" rows="4" required 
-                                  class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-[#A0A0A0]"
+                                  class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all resize-none"
                                   placeholder="Deskripsi lengkap tentang project Anda"></textarea>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="demo_url" class="block text-sm font-medium text-[#A0A0A0] mb-2">URL Demo</label>
+                            <label for="demo_url" class="block text-sm font-medium text-white/70 mb-3">URL Demo</label>
                             <input type="url" id="demo_url" name="demo_url" 
-                                   class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-[#A0A0A0]"
+                                   class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                                    placeholder="https://demo.example.com">
                         </div>
 
                         <div>
-                            <label for="source_code_url" class="block text-sm font-medium text-[#A0A0A0] mb-2">URL Source Code</label>
+                            <label for="source_code_url" class="block text-sm font-medium text-white/70 mb-3">URL Source Code</label>
                             <input type="url" id="source_code_url" name="source_code_url" 
-                                   class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-[#A0A0A0]"
+                                   class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                                    placeholder="https://github.com/username/repo">
                         </div>
                     </div>
 
                     <!-- Image Upload -->
                     <div>
-                        <label for="project_image" class="block text-sm font-medium text-[#A0A0A0] mb-2">Gambar Project</label>
+                        <label for="project_image" class="block text-sm font-medium text-white/70 mb-3">Gambar Project</label>
                         <div class="flex items-center gap-4">
                             <div class="flex-1">
                                 <input type="file" id="project_image" name="project_image" accept="image/*" 
-                                       class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-background-dark hover:file:bg-primary/80">
+                                       class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white file:text-black hover:file:bg-white/90">
                             </div>
                         </div>
-                        <p class="text-xs text-[#A0A0A0] mt-2">Format: JPG, PNG, GIF. Maksimal 2MB</p>
+                        <p class="text-xs text-white/60 mt-2">Format: JPG, PNG, GIF. Maksimal 2MB</p>
                         
                         <!-- Image Preview -->
                         <div id="imagePreview" class="mt-3 hidden">
-                            <p class="text-sm text-[#A0A0A0] mb-2">Preview gambar baru:</p>
+                            <p class="text-sm text-white/60 mb-2">Preview gambar baru:</p>
                             <img id="previewImage" class="max-w-full h-32 object-cover rounded-lg border border-white/10">
                         </div>
                         
                         <!-- Current Image (for edit) -->
                         <div id="currentImage" class="mt-3 hidden">
-                            <p class="text-sm text-[#A0A0A0] mb-2">Gambar saat ini:</p>
+                            <p class="text-sm text-white/60 mb-2">Gambar saat ini:</p>
                             <img id="currentImageSrc" class="max-w-full h-32 object-cover rounded-lg border border-white/10">
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-6 flex gap-3">
-                    <button type="submit" class="bg-primary text-background-dark px-4 py-2 rounded-lg hover:bg-primary/80 transition-colors font-bold flex-1">
-                        Simpan Project
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <button type="submit" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                        <i class="fas fa-save"></i>Simpan Project
                     </button>
-                    <button type="button" onclick="closeModal()" class="bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors font-bold flex-1">
-                        Batal
+                    <button type="button" onclick="closeModal()" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                        <i class="fas fa-times"></i>Batal
                     </button>
                 </div>
             </form>
@@ -189,27 +189,27 @@
 
 <style>
     .glassmorphism {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
     
     input, textarea, select {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
         color: white !important;
     }
     
     input:focus, textarea:focus, select:focus {
         outline: none;
         ring: 2px;
-        ring-color: #00FFFF;
-        border-color: #00FFFF !important;
+        ring-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.2) !important;
     }
     
     input::placeholder, textarea::placeholder {
-        color: #A0A0A0 !important;
+        color: rgba(255, 255, 255, 0.4) !important;
     }
     
     /* Custom scrollbar for modal */
@@ -313,6 +313,21 @@
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
         submitBtn.disabled = true;
+    });
+
+    // Add animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('.glassmorphism');
+        elements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
     });
 </script>
 <?= $this->endSection() ?>

@@ -5,10 +5,10 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-2xl lg:text-3xl font-bold text-white">Manage Skills</h1>
-            <p class="text-[#A0A0A0] mt-1">Kelola keahlian dan skills yang ditampilkan di portfolio</p>
+            <h1 class="text-2xl lg:text-3xl font-light text-white">Manage Skills</h1>
+            <p class="text-white/60 mt-1">Kelola keahlian dan skills yang ditampilkan di portfolio</p>
         </div>
-        <button onclick="openCreateModal()" class="bg-primary text-background-dark px-6 py-3 rounded-lg hover:bg-primary/80 transition-colors font-bold flex items-center gap-2 w-full sm:w-auto justify-center">
+        <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex items-center gap-2 w-full sm:w-auto justify-center">
             <i class="fas fa-plus"></i>
             Tambah Skill
         </button>
@@ -30,9 +30,9 @@
     <?php endif; ?>
 
     <!-- Skills Table -->
-    <div class="glassmorphism rounded-xl">
+    <div class="glassmorphism rounded-2xl">
         <div class="p-6 border-b border-white/10">
-            <h2 class="text-xl font-bold text-white">Daftar Skills</h2>
+            <h2 class="text-xl font-light text-white">Daftar Skills</h2>
         </div>
         <div class="p-6">
             <?php if (!empty($skills)): ?>
@@ -40,10 +40,10 @@
                     <table class="min-w-full">
                         <thead>
                             <tr class="border-b border-white/10">
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Nama Skill</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Kategori</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">Aksi</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Nama Skill</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Kategori</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-white/10">
@@ -53,15 +53,15 @@
                                         <div class="text-sm font-medium text-white"><?= $skill['name'] ?></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-[#A0A0A0]"><?= $skill['category'] ?></div>
+                                        <div class="text-sm text-white/60"><?= $skill['category'] ?></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?= $skill['is_active'] ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400' ?>">
+                                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-medium rounded-full <?= $skill['is_active'] ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400' ?>">
                                             <?= $skill['is_active'] ? 'Active' : 'Inactive' ?>
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button onclick="openEditModal(<?= htmlspecialchars(json_encode($skill)) ?>)" class="text-primary hover:text-primary/80 mr-4">
+                                        <button onclick="openEditModal(<?= htmlspecialchars(json_encode($skill)) ?>)" class="text-white hover:text-white/80 mr-4">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>
                                         
@@ -73,13 +73,14 @@
                                             </button>
                                         </form>
                                         
-                                        <form action="/admin/skills/delete/<?= $skill['id'] ?>" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this skill?')">
-                                            <?= csrf_field() ?>
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="text-red-400 hover:text-red-300">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </button>
-                                        </form>
+                                        <form action="/admin/skills/delete/<?= $skill['id'] ?>" method="POST" class="inline">
+    <?= csrf_field() ?>
+    <button type="submit" 
+            class="text-red-400 hover:text-red-300"
+            onclick="return confirm('Are you sure you want to delete <?= addslashes($skill['name']) ?>?')">
+        <i class="fas fa-trash"></i> Delete
+    </button>
+</form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -89,11 +90,11 @@
             <?php else: ?>
                 <div class="text-center py-12">
                     <div class="glassmorphism rounded-full size-20 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-code text-3xl text-[#A0A0A0]"></i>
+                        <i class="fas fa-code text-3xl text-white/60"></i>
                     </div>
-                    <h3 class="text-white text-lg font-semibold mb-2">Belum ada skills</h3>
-                    <p class="text-[#A0A0A0] mb-4">Tambahkan skill pertama Anda untuk ditampilkan di portfolio.</p>
-                    <button onclick="openCreateModal()" class="bg-primary text-background-dark px-6 py-3 rounded-lg hover:bg-primary/80 transition-colors font-bold flex items-center gap-2 mx-auto">
+                    <h3 class="text-white text-lg font-light mb-2">Belum ada skills</h3>
+                    <p class="text-white/60 mb-4">Tambahkan skill pertama Anda untuk ditampilkan di portfolio.</p>
+                    <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex items-center gap-2 mx-auto">
                         <i class="fas fa-plus"></i>
                         Tambah Skill Pertama
                     </button>
@@ -104,29 +105,34 @@
 </div>
 
 <!-- Create/Edit Modal -->
-<div id="skillModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
-    <div class="glassmorphism rounded-xl w-full max-w-md transform transition-all">
+<div id="skillModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden backdrop-blur-sm">
+    <div class="glassmorphism rounded-2xl w-full max-w-md transform transition-all">
         <div class="p-6 border-b border-white/10">
-            <h3 id="modalTitle" class="text-xl font-bold text-white">Tambah Skill Baru</h3>
+            <div class="flex items-center justify-between">
+                <h3 id="modalTitle" class="text-xl font-light text-white">Tambah Skill Baru</h3>
+                <button onclick="closeModal()" class="text-white/60 hover:text-white transition-colors">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
         </div>
         
         <form id="skillForm" method="POST" class="p-6">
             <?= csrf_field() ?>
             <input type="hidden" id="skillId" name="id">
             
-            <div class="space-y-4">
+            <div class="space-y-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-[#A0A0A0] mb-2">Nama Skill</label>
+                    <label for="name" class="block text-sm font-medium text-white/70 mb-3">Nama Skill</label>
                     <input type="text" id="name" name="name" required 
-                           class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-[#A0A0A0]"
+                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                            placeholder="Contoh: React.js, Node.js, etc.">
                 </div>
 
                 <div>
-                    <label for="category" class="block text-sm font-medium text-[#A0A0A0] mb-2">Kategori</label>
+                    <label for="category" class="block text-sm font-medium text-white/70 mb-3">Kategori</label>
                     <select id="category" name="category" required 
-                            class="w-full px-3 py-2 glassmorphism text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <option value="" class="text-[#A0A0A0]">Pilih Kategori</option>
+                            class="w-full px-4 py-3 rounded-lg glassmorphism text-white focus:outline-none focus:ring-2 focus:ring-white/20 transition-all">
+                        <option value="" class="text-white/40">Pilih Kategori</option>
                         <option value="Frontend" class="text-white">Frontend</option>
                         <option value="Backend" class="text-white">Backend</option>
                         <option value="Database" class="text-white">Database</option>
@@ -137,12 +143,12 @@
                 </div>
             </div>
 
-            <div class="mt-6 flex gap-3">
-                <button type="submit" class="bg-primary text-background-dark px-4 py-2 rounded-lg hover:bg-primary/80 transition-colors font-bold flex-1">
-                    Simpan
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <button type="submit" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                    <i class="fas fa-save"></i>Simpan
                 </button>
-                <button type="button" onclick="closeModal()" class="bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors font-bold flex-1">
-                    Batal
+                <button type="button" onclick="closeModal()" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                    <i class="fas fa-times"></i>Batal
                 </button>
             </div>
         </form>
@@ -151,37 +157,37 @@
 
 <style>
     .glassmorphism {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
     
     input, select {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        color: white !important;
     }
     
     input:focus, select:focus {
         outline: none;
         ring: 2px;
-        ring-color: #00FFFF;
+        ring-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.2) !important;
     }
     
-    /* Ensure text in inputs and selects is visible */
-    input, select, option {
-        color: white !important;
-    }
-    
-    /* Placeholder color */
     input::placeholder {
-        color: #A0A0A0 !important;
+        color: rgba(255, 255, 255, 0.4) !important;
     }
     
-    /* Selected option background */
-    option:checked {
-        background: #00FFFF !important;
-        color: #000000 !important;
+    select option {
+        background: #0A0A0A;
+        color: white;
+    }
+    
+    select option:checked {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
     }
 </style>
 
@@ -195,6 +201,7 @@
         document.getElementById('skillForm').reset();
         document.getElementById('skillId').value = '';
         document.getElementById('skillModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
     }
     
     function openEditModal(skill) {
@@ -205,10 +212,12 @@
         document.getElementById('name').value = skill.name;
         document.getElementById('category').value = skill.category;
         document.getElementById('skillModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
     }
     
     function closeModal() {
         document.getElementById('skillModal').classList.add('hidden');
+        document.body.style.overflow = '';
     }
     
     // Close modal when clicking outside
@@ -220,7 +229,7 @@
     
     // Close modal with Escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && !document.getElementById('skillModal').classList.contains('hidden')) {
             closeModal();
         }
     });
@@ -230,6 +239,21 @@
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
         submitBtn.disabled = true;
+    });
+
+    // Add animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('.glassmorphism');
+        elements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
     });
 </script>
 <?= $this->endSection() ?>

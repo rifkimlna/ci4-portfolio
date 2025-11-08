@@ -4,33 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - <?= $site_info['name'] ?? 'Portfolio Admin' ?></title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         .glassmorphism {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
+        
         .glassmorphism-hover:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
             transition: all 0.3s ease;
         }
+        
         .bg-background-dark {
-            background-color: #000000;
-        }
-        .material-symbols-outlined {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 300,
-          'GRAD' 0,
-          'opsz' 24
+            background-color: #0A0A0A;
         }
         
         /* Mobile menu styles */
@@ -61,9 +55,20 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Smooth transitions */
-        * {
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         /* Chart styling */
@@ -88,23 +93,28 @@
                     colors: {
                         "primary": "#00FFFF",
                         "primary-accent": "#A0A0A0",
-                        "background-dark": "#000000",
+                        "background-dark": "#0A0A0A",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
                     },
-                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", 
+                        "lg": "0.75rem", 
+                        "xl": "1rem", 
+                        "full": "9999px"
+                    },
                 },
             },
         }
     </script>
 </head>
-<body class="bg-black font-display text-white antialiased">
+<body class="bg-background-dark font-display text-white antialiased">
 
     <!-- Mobile Menu Button -->
     <div class="lg:hidden fixed top-4 right-4 z-50">
         <button id="mobileMenuButton" class="glassmorphism p-3 rounded-lg">
-            <i class="fas fa-bars"></i>
+            <i class="fas fa-bars text-white/70"></i>
         </button>
     </div>
 
@@ -112,21 +122,21 @@
         <div class="flex flex-1">
             <!-- SideNavBar -->
             <aside class="mobile-menu lg:transform-none fixed inset-y-0 left-0 z-40 w-64 flex-shrink-0 p-4 lg:static lg:z-auto">
-                <div class="flex h-full flex-col justify-between rounded-xl glassmorphism p-4 lg:p-6">
+                <div class="flex h-full flex-col justify-between rounded-2xl glassmorphism p-6">
                     <!-- Close button for mobile -->
-                    <button class="lg:hidden self-end mb-4 text-[#A0A0A0] hover:text-white">
+                    <button class="lg:hidden self-end mb-4 text-white/60 hover:text-white">
                         <i class="fas fa-times text-lg"></i>
                     </button>
 
                     <!-- Logo and User Info -->
-                    <div class="flex flex-col gap-6 lg:gap-8">
+                    <div class="flex flex-col gap-8">
                         <div class="flex items-center gap-3">
                             <div class="size-8 text-white">
                                 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                                     <path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <h1 class="text-white text-lg font-bold">Rifki Maulana</h1>
+                            <h1 class="text-white text-lg font-semibold"><?= $site_info['name'] ?? 'Portfolio' ?></h1>
                         </div>
 
                         <!-- User Info -->
@@ -136,7 +146,7 @@
                             </div>
                             <div class="flex flex-col min-w-0">
                                 <h1 class="text-white text-sm font-medium leading-normal truncate"><?= session()->get('username') ?? 'Admin' ?></h1>
-                                <p class="text-[#A0A0A0] text-xs font-normal leading-normal">Administrator</p>
+                                <p class="text-white/60 text-xs font-normal leading-normal">Administrator</p>
                             </div>
                         </div>
 
@@ -146,40 +156,36 @@
                                 <span class="material-symbols-outlined text-lg">dashboard</span>
                                 <p class="text-sm font-medium leading-normal">Dashboard</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-white/10 hover:text-white transition-all" href="/admin/site-info">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/site-info">
                                 <span class="material-symbols-outlined text-lg">info</span>
                                 <p class="text-sm font-medium leading-normal">Site Info</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-white/10 hover:text-white transition-all" href="/admin/projects">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/projects">
                                 <span class="material-symbols-outlined text-lg">folder</span>
                                 <p class="text-sm font-medium leading-normal">Projects</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-white/10 hover:text-white transition-all" href="/admin/skills">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/skills">
                                 <span class="material-symbols-outlined text-lg">code</span>
                                 <p class="text-sm font-medium leading-normal">Skills</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-white/10 hover:text-white transition-all" href="/admin/social-links">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/social-links">
                                 <span class="material-symbols-outlined text-lg">share</span>
                                 <p class="text-sm font-medium leading-normal">Social Links</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-white/10 hover:text-white transition-all" href="/admin/contacts">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/contacts">
                                 <span class="material-symbols-outlined text-lg">mail</span>
                                 <p class="text-sm font-medium leading-normal">Messages</p>
                             </a>
                         </nav>
-
-                    
-
-                        
                     </div>
 
                     <!-- Bottom Actions -->
                     <div class="flex flex-col gap-2">
-                        <button id="theme-toggle" class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-white/10 hover:text-white transition-all">
+                        <button id="theme-toggle" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all">
                             <span class="material-symbols-outlined text-lg">dark_mode</span>
                             <p class="text-sm font-medium leading-normal">Toggle Theme</p>
                         </button>
-                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#A0A0A0] hover:bg-red-500/20 hover:text-red-400 transition-all" href="/admin/logout">
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-red-500/20 hover:text-red-400 transition-all" href="/admin/logout">
                             <span class="material-symbols-outlined text-lg">logout</span>
                             <p class="text-sm font-medium leading-normal">Logout</p>
                         </a>
@@ -191,21 +197,21 @@
             <div id="mobileBackdrop" class="backdrop fixed inset-0 z-30 lg:hidden hidden"></div>
 
             <!-- Main Content -->
-            <main class="flex-1 p-4 lg:p-6 min-h-screen w-full lg:w-[calc(100%-16rem)]">
+            <main class="flex-1 p-6 min-h-screen w-full lg:w-[calc(100%-16rem)]">
                 <div class="flex flex-col gap-6">
                     <!-- Welcome Section -->
-                    <div class="glassmorphism rounded-xl p-6">
-                        <h1 class="text-2xl font-bold text-white mb-2">Selamat datang, <?= session()->get('username') ?? 'Rifki' ?></h1>
-                        <p class="text-[#A0A0A0]">Ringkasan aktivitas dan statistik portfolio</p>
+                    <div class="glassmorphism rounded-2xl p-6">
+                        <h1 class="text-2xl font-light text-white mb-2">Selamat datang, <?= session()->get('username') ?? 'Admin' ?></h1>
+                        <p class="text-white/60">Ringkasan aktivitas dan statistik portfolio</p>
                     </div>
 
                     <!-- Stats Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Total Projects -->
-                        <div class="glassmorphism rounded-xl p-6">
+                        <div class="glassmorphism rounded-2xl p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-[#A0A0A0] text-sm font-medium">Total Projek</h3>
-                                <span class="material-symbols-outlined text-[#A0A0A0]">folder</span>
+                                <h3 class="text-white/60 text-sm font-medium">Total Projek</h3>
+                                <span class="material-symbols-outlined text-white/60">folder</span>
                             </div>
                             <div class="flex items-baseline justify-between">
                                 <p class="text-white text-3xl font-bold"><?= $project_count ?? '1' ?></p>
@@ -214,10 +220,10 @@
                         </div>
 
                         <!-- Unread Messages -->
-                        <div class="glassmorphism rounded-xl p-6">
+                        <div class="glassmorphism rounded-2xl p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-[#A0A0A0] text-sm font-medium">Pesan Belum Dibaca</h3>
-                                <span class="material-symbols-outlined text-[#A0A0A0]">mail</span>
+                                <h3 class="text-white/60 text-sm font-medium">Pesan Belum Dibaca</h3>
+                                <span class="material-symbols-outlined text-white/60">mail</span>
                             </div>
                             <div class="flex items-baseline justify-between">
                                 <p class="text-white text-3xl font-bold"><?= $unread_contact_count ?? '1' ?></p>
@@ -226,10 +232,10 @@
                         </div>
 
                         <!-- Total Skills -->
-                        <div class="glassmorphism rounded-xl p-6">
+                        <div class="glassmorphism rounded-2xl p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-[#A0A0A0] text-sm font-medium">Total Skills</h3>
-                                <span class="material-symbols-outlined text-[#A0A0A0]">code</span>
+                                <h3 class="text-white/60 text-sm font-medium">Total Skills</h3>
+                                <span class="material-symbols-outlined text-white/60">code</span>
                             </div>
                             <div class="flex items-baseline justify-between">
                                 <p class="text-white text-3xl font-bold"><?= $skill_count ?? '1' ?></p>
@@ -241,14 +247,14 @@
                     <!-- Analytics and Recent Messages -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Analytics Chart -->
-                        <div class="lg:col-span-2 glassmorphism rounded-xl p-6">
-                            <h2 class="text-white text-xl font-bold mb-6">Analitik Pengunjung</h2>
+                        <div class="lg:col-span-2 glassmorphism rounded-2xl p-6">
+                            <h2 class="text-white text-xl font-light mb-6">Analitik Pengunjung</h2>
                             <div class="flex flex-col gap-4">
                                 <div class="flex items-baseline gap-2">
                                     <p class="text-white text-3xl font-bold">1.2k</p>
                                     <p class="text-green-400 text-sm font-medium">+4.2%</p>
                                 </div>
-                                <p class="text-[#A0A0A0] text-sm">30 Hari Terakhir</p>
+                                <p class="text-white/60 text-sm">30 Hari Terakhir</p>
                                 
                                 <!-- Chart -->
                                 <div class="mt-4">
@@ -262,7 +268,7 @@
                                         <path class="chart-path" d="M0,80 C50,80 50,20 100,20 C150,20 150,60 200,60 C250,60 250,30 300,30 C350,30 350,90 400,90" 
                                               fill="url(#chartGradient)" />
                                     </svg>
-                                    <div class="flex justify-between text-xs text-[#A0A0A0] mt-2">
+                                    <div class="flex justify-between text-xs text-white/60 mt-2">
                                         <span>Minggu 1</span>
                                         <span>Minggu 2</span>
                                         <span>Minggu 3</span>
@@ -273,10 +279,10 @@
                         </div>
 
                         <!-- Recent Messages -->
-                        <div class="lg:col-span-1 glassmorphism rounded-xl p-6">
+                        <div class="lg:col-span-1 glassmorphism rounded-2xl p-6">
                             <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-white text-xl font-bold">Pesan Terbaru</h2>
-                                <a href="/admin/contacts" class="text-[#A0A0A0] hover:text-white text-sm transition-colors">
+                                <h2 class="text-white text-xl font-light">Pesan Terbaru</h2>
+                                <a href="/admin/contacts" class="text-white/60 hover:text-white text-sm transition-colors">
                                     Lihat semua
                                 </a>
                             </div>
@@ -290,9 +296,9 @@
                                             <div class="flex-1 min-w-0">
                                                 <div class="flex justify-between items-start">
                                                     <h3 class="text-white text-sm font-medium truncate"><?= $contact['name'] ?></h3>
-                                                    <span class="text-[#A0A0A0] text-xs flex-shrink-0 ml-2"><?= date('M j', strtotime($contact['created_at'])) ?></span>
+                                                    <span class="text-white/60 text-xs flex-shrink-0 ml-2"><?= date('M j', strtotime($contact['created_at'])) ?></span>
                                                 </div>
-                                                <p class="text-[#A0A0A0] text-xs mt-1 line-clamp-2"><?= $contact['message'] ?></p>
+                                                <p class="text-white/60 text-xs mt-1 line-clamp-2"><?= $contact['message'] ?></p>
                                             </div>
                                             <?php if (!$contact['is_read']): ?>
                                                 <div class="size-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
@@ -307,7 +313,7 @@
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <h3 class="text-white text-sm font-medium truncate">Rifki Maulana</h3>
-                                            <p class="text-[#A0A0A0] text-xs mt-1 line-clamp-2">Tolong untuk bisa menjadi yang terbaik dalam bidang ini...</p>
+                                            <p class="text-white/60 text-xs mt-1 line-clamp-2">Tolong untuk bisa menjadi yang terbaik dalam bidang ini...</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
@@ -316,7 +322,7 @@
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <h3 class="text-white text-sm font-medium truncate">Rifki Maulana</h3>
-                                            <p class="text-[#A0A0A0] text-xs mt-1 line-clamp-2">Tolong untuk bisa menjadi yang terbaik dalam bidang ini...</p>
+                                            <p class="text-white/60 text-xs mt-1 line-clamp-2">Tolong untuk bisa menjadi yang terbaik dalam bidang ini...</p>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -325,13 +331,13 @@
                     </div>
 
                     <!-- Tambah Projek Baru Section -->
-                    <div class="glassmorphism rounded-xl p-6">
+                    <div class="glassmorphism rounded-2xl p-6">
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div>
-                                <h2 class="text-white text-xl font-bold">Tambah Projek Baru</h2>
-                                <p class="text-[#A0A0A0] text-sm mt-1">Mulai proyek portfolio baru Anda</p>
+                                <h2 class="text-white text-xl font-light">Tambah Projek Baru</h2>
+                                <p class="text-white/60 text-sm mt-1">Mulai proyek portfolio baru Anda</p>
                             </div>
-                            <a href="/admin/projects/create" class="bg-primary text-black text-sm font-bold py-3 px-6 rounded-lg hover:bg-opacity-80 transition-opacity inline-flex items-center justify-center gap-2 w-full sm:w-auto">
+                            <a href="/admin/projects" class="bg-white text-black text-sm font-medium py-3 px-6 rounded-lg hover:bg-white/90 transition-colors inline-flex items-center justify-center gap-2 w-full sm:w-auto">
                                 <span class="material-symbols-outlined text-lg">add</span>
                                 Tambah Projek
                             </a>
@@ -409,8 +415,21 @@
                 const href = item.getAttribute('href');
                 if (currentPath === href || currentPath.startsWith(href + '/')) {
                     item.classList.add('bg-white/10', 'text-white');
-                    item.classList.remove('text-[#A0A0A0]');
+                    item.classList.remove('text-white/60');
                 }
+            });
+
+            // Add animations
+            const elements = document.querySelectorAll('.glassmorphism');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
             });
         });
 
