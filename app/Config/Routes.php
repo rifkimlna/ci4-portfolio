@@ -16,6 +16,12 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->post('/contact', 'Home::contact');
 
+
+
+$routes->get('projects', 'Projects::index');
+$routes->get('projects/(:num)', 'Projects::detail/$1');
+
+
 // Admin routes
 $routes->group('admin', function($routes) {
     // Auth routes

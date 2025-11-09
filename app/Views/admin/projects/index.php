@@ -14,20 +14,7 @@
         </button>
     </div>
 
-    <!-- Notifications -->
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="glassmorphism bg-green-500/20 border border-green-500 text-green-300 px-4 py-3 rounded-lg">
-            <i class="fas fa-check-circle mr-2"></i>
-            <?= session()->getFlashdata('success') ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('error')): ?>
-        <div class="glassmorphism bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg">
-            <i class="fas fa-exclamation-circle mr-2"></i>
-            <?= session()->getFlashdata('error') ?>
-        </div>
-    <?php endif; ?>
+    <!-- HAPUS BAGIAN NOTIFICATIONS DI SINI karena sudah ada di layout -->
 
     <!-- Projects Table -->
     <div class="glassmorphism rounded-2xl">
@@ -40,6 +27,7 @@
                     <table class="min-w-full">
                         <thead>
                             <tr class="border-b border-white/10">
+                                <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Gambar</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Judul</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Teknologi</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">Aksi</th>
@@ -48,6 +36,15 @@
                         <tbody class="divide-y divide-white/10">
                             <?php foreach ($projects as $project): ?>
                                 <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <?php if ($project['image_url']): ?>
+                                            <img src="<?= base_url($project['image_url']) ?>" alt="<?= $project['title'] ?>" class="w-16 h-16 object-cover rounded-lg border border-white/10">
+                                        <?php else: ?>
+                                            <div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center border border-white/10">
+                                                <i class="fas fa-image text-white/40"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm font-medium text-white"><?= $project['title'] ?></div>
                                     </td>
@@ -111,26 +108,42 @@
                 <?= csrf_field() ?>
                 <input type="hidden" id="projectId" name="id">
                 
+                <!-- Tampilkan validation errors di dalam modal -->
+                <?php 
+                $validationErrors = session()->getFlashdata('error');
+                if (is_array($validationErrors)): ?>
+                    <div class="mb-6 p-4 bg-red-500/20 border border-red-500 text-red-300 rounded-lg">
+                        <h4 class="font-medium mb-2">Terjadi kesalahan:</h4>
+                        <ul class="list-disc list-inside text-sm">
+                            <?php foreach ($validationErrors as $error): ?>
+                                <li><?= $error ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+                
                 <div class="grid grid-cols-1 gap-6">
                     <div>
                         <label for="title" class="block text-sm font-medium text-white/70 mb-3">Judul Project *</label>
                         <input type="text" id="title" name="title" required 
                                class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
-                               placeholder="Nama project Anda">
+                               placeholder="Nama project Anda"
+                               value="<?= old('title', '') ?>">
                     </div>
 
                     <div>
                         <label for="technologies" class="block text-sm font-medium text-white/70 mb-3">Teknologi</label>
                         <input type="text" id="technologies" name="technologies" 
                                class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
-                               placeholder="React, Node.js, MongoDB, etc.">
+                               placeholder="React, Node.js, MongoDB, etc."
+                               value="<?= old('technologies', '') ?>">
                     </div>
 
                     <div>
                         <label for="description" class="block text-sm font-medium text-white/70 mb-3">Deskripsi *</label>
                         <textarea id="description" name="description" rows="4" required 
                                   class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all resize-none"
-                                  placeholder="Deskripsi lengkap tentang project Anda"></textarea>
+                                  placeholder="Deskripsi lengkap tentang project Anda"><?= old('description', '') ?></textarea>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -138,14 +151,16 @@
                             <label for="demo_url" class="block text-sm font-medium text-white/70 mb-3">URL Demo</label>
                             <input type="url" id="demo_url" name="demo_url" 
                                    class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
-                                   placeholder="https://demo.example.com">
+                                   placeholder="https://demo.example.com"
+                                   value="<?= old('demo_url', '') ?>">
                         </div>
 
                         <div>
                             <label for="source_code_url" class="block text-sm font-medium text-white/70 mb-3">URL Source Code</label>
                             <input type="url" id="source_code_url" name="source_code_url" 
                                    class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
-                                   placeholder="https://github.com/username/repo">
+                                   placeholder="https://github.com/username/repo"
+                                   value="<?= old('source_code_url', '') ?>">
                         </div>
                     </div>
 
@@ -158,7 +173,7 @@
                                        class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white file:text-black hover:file:bg-white/90">
                             </div>
                         </div>
-                        <p class="text-xs text-white/60 mt-2">Format: JPG, PNG, GIF. Maksimal 2MB</p>
+                        <p class="text-xs text-white/60 mt-2">Format: JPG, PNG, GIF. Maksimal 5MB</p>
                         
                         <!-- Image Preview -->
                         <div id="imagePreview" class="mt-3 hidden">
@@ -187,51 +202,7 @@
     </div>
 </div>
 
-<style>
-    .glassmorphism {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    input, textarea, select {
-        background: rgba(255, 255, 255, 0.03) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        color: white !important;
-    }
-    
-    input:focus, textarea:focus, select:focus {
-        outline: none;
-        ring: 2px;
-        ring-color: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.2) !important;
-    }
-    
-    input::placeholder, textarea::placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
-    }
-    
-    /* Custom scrollbar for modal */
-    #projectModal .overflow-y-auto::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    #projectModal .overflow-y-auto::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 3px;
-    }
-    
-    #projectModal .overflow-y-auto::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 3px;
-    }
-    
-    #projectModal .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.3);
-    }
-</style>
-
+<!-- JavaScript dan CSS tetap sama -->
 <script>
     let currentAction = 'create';
     
@@ -244,7 +215,13 @@
         document.getElementById('imagePreview').classList.add('hidden');
         document.getElementById('currentImage').classList.add('hidden');
         document.getElementById('projectModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
+        
+        // Auto open modal jika ada error validation
+        <?php if (session()->getFlashdata('error') && is_array(session()->getFlashdata('error'))): ?>
+            document.getElementById('projectModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        <?php endif; ?>
     }
     
     function openEditModal(project) {
@@ -259,21 +236,25 @@
         document.getElementById('source_code_url').value = project.source_code_url || '';
         
         // Show current image if exists
+        const currentImageDiv = document.getElementById('currentImage');
         if (project.image_url) {
-            document.getElementById('currentImageSrc').src = project.image_url;
-            document.getElementById('currentImage').classList.remove('hidden');
+            const currentImageSrc = document.getElementById('currentImageSrc');
+            if (currentImageSrc) {
+                currentImageSrc.src = '<?= base_url() ?>' + project.image_url;
+            }
+            currentImageDiv.classList.remove('hidden');
         } else {
-            document.getElementById('currentImage').classList.add('hidden');
+            currentImageDiv.classList.add('hidden');
         }
         
         document.getElementById('imagePreview').classList.add('hidden');
         document.getElementById('projectModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
     }
     
     function closeModal() {
         document.getElementById('projectModal').classList.add('hidden');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
     }
     
     // Image preview functionality
@@ -315,19 +296,11 @@
         submitBtn.disabled = true;
     });
 
-    // Add animations
+    // Auto open modal jika ada error validation saat page load
     document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.glassmorphism');
-        elements.forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
+        <?php if (session()->getFlashdata('error') && is_array(session()->getFlashdata('error'))): ?>
+            openCreateModal();
+        <?php endif; ?>
     });
 </script>
 <?= $this->endSection() ?>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Admin Dashboard' ?> - <?= $site_info['name'] ?? 'Portfolio Admin' ?></title>
+     <link rel="icon" type="image/svg+xml" href="assets/icons/logoporto.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
@@ -195,20 +196,28 @@
                         </div>
                     </div>
 
-                    <!-- Notifications -->
                     <?php if (session()->getFlashdata('success')): ?>
-                        <div class="glassmorphism bg-green-500/20 border border-green-500 text-green-300 px-4 py-3 rounded-lg text-base">
-                            <i class="fas fa-check-circle mr-2"></i>
-                            <?= session()->getFlashdata('success') ?>
-                        </div>
-                    <?php endif; ?>
+    <div class="glassmorphism bg-green-500/20 border border-green-500 text-green-300 px-4 py-3 rounded-lg text-base">
+        <i class="fas fa-check-circle mr-2"></i>
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
 
-                    <?php if (session()->getFlashdata('error')): ?>
-                        <div class="glassmorphism bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg text-base">
-                            <i class="fas fa-exclamation-circle mr-2"></i>
-                            <?= session()->getFlashdata('error') ?>
-                        </div>
-                    <?php endif; ?>
+<?php 
+$errorFlash = session()->getFlashdata('error');
+if ($errorFlash): ?>
+    <div class="glassmorphism bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg text-base">
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <?php 
+        if (is_array($errorFlash)) {
+            // Tampilkan error pertama saja
+            echo isset($errorFlash[0]) ? $errorFlash[0] : 'Terjadi kesalahan';
+        } else {
+            echo $errorFlash;
+        }
+        ?>
+    </div>
+<?php endif; ?>
 
                     <!-- Main Content Section -->
                     <div class="glassmorphism rounded-2xl p-6">
