@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio <?= $site_info['name'] ?? 'Rifki Maulana' ?></title>
-    <link rel="icon" type="image/svg+xml" href="assets/icons/logoporto.svg">
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/logoporto.svg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -25,7 +24,6 @@
             transition: all 0.3s ease;
         }
         
-        /* BACKGROUND SPLINE DARI KODE KEDUA */
         spline-viewer {
             position: fixed;
             top: 0;
@@ -46,7 +44,6 @@
             background-color: #0A0A0A;
         }
         
-        /* NAVBAR STYLES BARU - LOGO KIRI, CTA KANAN */
         .navbar-full {
             position: fixed;
             top: 0;
@@ -133,7 +130,6 @@
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
         }
 
-        /* Logo Styles */
         .logo-container {
             display: flex;
             align-items: center;
@@ -150,12 +146,6 @@
             color: white;
         }
         
-        .logo-icon svg {
-            width: 100%;
-            height: 100%;
-            filter: brightness(0) invert(1); /* Mengubah SVG menjadi putih */
-        }
-        
         .logo-text {
             font-weight: 700;
             font-size: 1.25rem;
@@ -165,7 +155,6 @@
             background-clip: text;
         }
         
-        /* Mobile Navigation Styles */
         .mobile-nav-overlay {
             position: fixed;
             top: 0;
@@ -246,14 +235,12 @@
             top: 9px;
         }
 
-        /* Center Navigation Links */
         .nav-center {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -265,44 +252,10 @@
             }
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
         .animate-fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Text selection */
-        ::selection {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        
-        /* Responsive adjustments */
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem !important;
@@ -331,7 +284,35 @@
             }
         }
 
-        
+
+
+         .footer-gradient {
+        background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+    }
+    
+    .social-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        color: #a855f7 !important;
+        transform: translateY(-2px) scale(1.1);
+    }
+    
+    .footer-link {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .footer-link:hover {
+        color: #a855f7 !important;
+        transform: translateX(8px);
+    }
+    
+    .footer-link.group {
+        display: flex;
+        align-items: center;
+    }
     </style>
     
     <script>
@@ -345,64 +326,45 @@
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.5rem", 
-                        "lg": "0.75rem", 
-                        "xl": "1rem", 
-                        "full": "9999px"
-                    },
+                    }
                 },
             },
         }
     </script>
     
-    <!-- SPLINE SCRIPT DARI KODE KEDUA -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.95/build/spline-viewer.js"></script>
 </head>
 <body class="bg-background-dark font-display text-white antialiased">
 
-    <!-- BACKGROUND SPLINE DARI KODE KEDUA -->
     <spline-viewer 
         url="https://prod.spline.design/lPtouUjIBDltsZ5Z/scene.splinecode"
         hide-watermark
         background="transparent">
     </spline-viewer>
 
-    <!-- Content Overlay -->
     <div class="content-overlay">
-        <!-- NAVBAR FULL WIDTH BARU - LOGO KIRI, CTA KANAN -->
         <nav class="navbar-full" id="navbar">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="flex items-center justify-between h-16">
-                    <!-- Logo - KIRI -->
                     <div class="flex items-center flex-shrink-0">
                         <div class="logo-container">
                             <div class="logo-icon">
-                                <!-- Logo dari file SVG -->
-                                <img src="assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
+                                <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
                             </div>
-                            <!-- <span class="logo-text"><?= $site_info['name'] ?? 'Portfolio' ?></span> -->
                         </div>
                     </div>
                     
-                    <!-- Desktop Navigation Links - TENGAH -->
                     <div class="hidden md:flex items-center space-x-1 nav-center">
-                        <a href="#proyek" class="nav-link" data-section="proyek">Proyek</a>
-                        <a href="#tentang" class="nav-link" data-section="tentang">Tentang</a>
-                        <a href="#kontak" class="nav-link" data-section="kontak">Kontak</a>
-                       
+                        <a href="#proyek" class="nav-link" data-section="proyek">Projects</a>
+                        <a href="#tentang" class="nav-link" data-section="tentang">About</a>
+                        <a href="#kontak" class="nav-link" data-section="kontak">Contacts</a>
                     </div>
                     
-                    <!-- CTA Button - KANAN -->
                     <div class="hidden md:flex items-center flex-shrink-0">
-                        <a href="#kontak" class="cta-button text-sm">
-                            Hubungi Saya
-                        </a>
-                         <a href="/admin/login" class="nav-link">Login</a>
+                        <a href="#kontak" class="cta-button text-sm">Hubungi Saya</a>
+                        <!-- <a href="/admin/login" class="nav-link">Login</a> -->
                     </div>
                     
-                    <!-- Mobile Menu Button - KANAN -->
                     <div class="md:hidden flex items-center">
                         <div class="hamburger-menu" id="hamburgerMenu">
                             <span></span>
@@ -414,43 +376,36 @@
             </div>
         </nav>
 
-        <!-- Mobile Navigation Overlay -->
         <div class="mobile-nav-overlay" id="mobileNavOverlay">
             <div class="mobile-nav-content">
-                <a href="#proyek" class="mobile-nav-link" onclick="closeMobileNav()">Proyek</a>
-                <a href="#tentang" class="mobile-nav-link" onclick="closeMobileNav()">Tentang</a>
-                <a href="#kontak" class="mobile-nav-link" onclick="closeMobileNav()">Kontak</a>
-                <a href="/admin/login" class="mobile-nav-link" onclick="closeMobileNav()">Login</a>
+                <a href="#proyek" class="mobile-nav-link" onclick="closeMobileNav()">Projects</a>
+                <a href="#tentang" class="mobile-nav-link" onclick="closeMobileNav()">About</a>
+                <a href="#kontak" class="mobile-nav-link" onclick="closeMobileNav()">Contacts</a>
+                <!-- <a href="/admin/login" class="mobile-nav-link" onclick="closeMobileNav()">Login</a> -->
                 <a href="#kontak" class="cta-button mt-8 inline-block" onclick="closeMobileNav()">Hubungi Saya</a>
             </div>
         </div>
 
         <div class="min-h-screen pt-16">
-            <!-- Hero Section -->
             <section class="min-h-screen flex items-center justify-center px-6 pt-20">
                 <div class="max-w-4xl mx-auto text-center">
-                    <!-- Badge -->
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glassmorphism mb-8 animate-fade-in-up">
                         <div class="size-2 bg-green-400 rounded-full animate-pulse"></div>
                         <span class="text-white/70 text-sm font-medium">Available for projects</span>
                     </div>
                     
-                    <!-- Main Title -->
                     <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6 animate-fade-in-up">
                         <span class="block text-white"><?= $site_info['name'] ?? 'Rifki Maulana' ?></span>
                     </h1>
                     
-                    <!-- Subtitle -->
                     <h2 class="text-2xl md:text-3xl text-white/70 font-normal mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">
                         <?= $site_info['title'] ?? 'Full-Stack Developer' ?>
                     </h2>
                     
-                    <!-- Description -->
                     <p class="text-lg text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style="animation-delay: 0.4s;">
                         <?= $site_info['bio'] ?? 'Membangun solusi digital yang elegan dan fungsional dengan teknologi modern.' ?>
                     </p>
                     
-                    <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.6s;">
                         <a href="#proyek" class="bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-white/90 transition-colors">
                             Lihat Proyek
@@ -462,23 +417,16 @@
                 </div>
             </section>
 
-            <!-- About Section -->
             <section id="tentang" class="py-20 px-6">
                 <div class="max-w-4xl mx-auto">
                     <div class="glassmorphism rounded-3xl p-8 md:p-12">
                         <h2 class="section-title text-3xl md:text-4xl font-light text-white mb-8 text-center">Tentang Saya</h2>
                         
                         <div class="space-y-6 text-white/60 text-lg leading-relaxed">
-                            <p>
-                                <?= $site_info['about_description'] ?? 'Saya adalah pengembang web dengan fokus pada pembuatan pengalaman digital yang intuitif dan performan. Pendekatan saya menggabungkan estetika yang bersih dengan fungsionalitas yang solid.' ?>
-                            </p>
-                            
-                            <p>
-                                <?= $site_info['about_experience'] ?? 'Spesialisasi utama saya mencakup pengembangan front-end dengan React dan Vue.js, serta back-end dengan Node.js dan berbagai teknologi database modern.' ?>
-                            </p>
+                            <p><?= $site_info['about_description'] ?? 'Saya adalah pengembang web dengan fokus pada pembuatan pengalaman digital yang intuitif dan performan.' ?></p>
+                            <p><?= $site_info['about_experience'] ?? 'Spesialisasi utama saya mencakup pengembangan front-end dengan React dan Vue.js, serta back-end dengan Node.js dan berbagai teknologi database modern.' ?></p>
                         </div>
                         
-                        <!-- Skills -->
                         <div class="mt-12">
                             <h3 class="text-xl font-medium text-white mb-6">Keahlian Teknis</h3>
                             <div class="flex flex-wrap gap-3">
@@ -493,8 +441,6 @@
                                     <span class="px-4 py-2 bg-white/10 rounded-lg text-white/80 font-medium border border-white/10 hover:border-white/20 transition-colors">Vue.js</span>
                                     <span class="px-4 py-2 bg-white/10 rounded-lg text-white/80 font-medium border border-white/10 hover:border-white/20 transition-colors">Node.js</span>
                                     <span class="px-4 py-2 bg-white/10 rounded-lg text-white/80 font-medium border border-white/10 hover:border-white/20 transition-colors">TypeScript</span>
-                                    <span class="px-4 py-2 bg-white/10 rounded-lg text-white/80 font-medium border border-white/10 hover:border-white/20 transition-colors">MongoDB</span>
-                                    <span class="px-4 py-2 bg-white/10 rounded-lg text-white/80 font-medium border border-white/10 hover:border-white/20 transition-colors">PostgreSQL</span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -502,101 +448,66 @@
                 </div>
             </section>
 
-           <!-- Projects Section -->
-<section id="proyek" class="py-20 px-6">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-light text-white mb-4">Proyek Terpilih</h2>
-            <p class="text-white/60 text-lg max-w-2xl mx-auto">Koleksi karya yang merepresentasikan pendekatan dan keahlian saya</p>
-        </div>
+            <section id="proyek" class="py-20 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-white mb-4">Proyek Terpilih</h2>
+                        <p class="text-white/60 text-lg max-w-2xl mx-auto">Koleksi karya yang merepresentasikan pendekatan dan keahlian saya</p>
+                    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <?php if (!empty($projects)): ?>
-                <?php foreach ($projects as $project): ?>
-                    <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
-                        <!-- Project Image -->
-                        <div class="aspect-video bg-white/5 relative overflow-hidden">
-                            <img src="<?= $project['image_url'] ?: 'https://placehold.co/600x400/1a1a1a/ffffff?text=' . urlencode($project['title']) ?>" 
-                                 alt="<?= $project['title'] ?>" 
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div class="flex gap-4">
-                                    <?php if ($project['demo_url']): ?>
-                                        <a href="<?= $project['demo_url'] ?>" target="_blank" 
-                                           class="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/90 transition-colors">
-                                            Demo
-                                        </a>
-                                    <?php endif; ?>
-                                    <?php if ($project['source_code_url']): ?>
-                                        <a href="<?= $project['source_code_url'] ?>" target="_blank" 
-                                           class="border border-white text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors">
-                                            Kode
-                                        </a>
-                                    <?php endif; ?>
-                                   <a href="/projects/<?= $project['id'] ?>" 
-   class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors">
-    Detail
-</a>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <?php if (!empty($projects)): ?>
+                            <?php foreach ($projects as $project): ?>
+                                <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
+                                    <div class="aspect-video bg-white/5 relative overflow-hidden">
+                                        <img src="<?= base_url($project['image_url'] ?? 'uploads/projects/' . $project['image']) ?: 'https://placehold.co/600x400/1a1a1a/ffffff?text=' . urlencode($project['title']) ?>" 
+                                             alt="<?= $project['title'] ?>" 
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                            <div class="flex gap-4">
+                                                <?php if ($project['demo_url']): ?>
+                                                    <a href="<?= $project['demo_url'] ?>" target="_blank" 
+                                                       class="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/90 transition-colors">
+                                                        Demo
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if ($project['source_code_url']): ?>
+                                                    <a href="<?= $project['source_code_url'] ?>" target="_blank" 
+                                                       class="border border-white text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors">
+                                                        Kode
+                                                    </a>
+                                                <?php endif; ?>
+                                                <a href="/projects/<?= $project['id'] ?>" 
+                                                   class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors">
+                                                    Detail
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-medium text-white mb-2"><?= $project['title'] ?></h3>
+                                        <p class="text-white/60 text-sm mb-3"><?= $project['technologies'] ?></p>
+                                        <p class="text-white/70 text-sm leading-relaxed"><?= $project['description'] ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
+                                <div class="aspect-video bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
+                                    <span class="text-white/30 text-lg">Project Image</span>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-medium text-white mb-2">E-Commerce Platform</h3>
+                                    <p class="text-white/60 text-sm mb-3">React, Node.js, MongoDB</p>
+                                    <p class="text-white/70 text-sm leading-relaxed">Platform e-commerce modern dengan fitur real-time inventory.</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Project Info -->
-                        <div class="p-6">
-                            <h3 class="text-xl font-medium text-white mb-2"><?= $project['title'] ?></h3>
-                            <p class="text-white/60 text-sm mb-3"><?= $project['technologies'] ?></p>
-                            <p class="text-white/70 text-sm leading-relaxed"><?= $project['description'] ?></p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <!-- Default Projects -->
-                <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
-                    <div class="aspect-video bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
-                        <span class="text-white/30 text-lg">Project Image</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-medium text-white mb-2">E-Commerce Platform</h3>
-                        <p class="text-white/60 text-sm mb-3">React, Node.js, MongoDB</p>
-                        <p class="text-white/70 text-sm leading-relaxed">Platform e-commerce modern dengan fitur real-time inventory dan payment gateway integration.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
-                
-                <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
-                    <div class="aspect-video bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
-                        <span class="text-white/30 text-lg">Project Image</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-medium text-white mb-2">Task Management App</h3>
-                        <p class="text-white/60 text-sm mb-3">Vue.js, Firebase, TypeScript</p>
-                        <p class="text-white/70 text-sm leading-relaxed">Aplikasi manajemen tugas dengan kolaborasi real-time dan analytics dashboard.</p>
-                    </div>
-                </div>
-                
-                <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
-                    <div class="aspect-video bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
-                        <span class="text-white/30 text-lg">Project Image</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-medium text-white mb-2">Portfolio Website</h3>
-                        <p class="text-white/60 text-sm mb-3">Next.js, Tailwind CSS, CMS</p>
-                        <p class="text-white/70 text-sm leading-relaxed">Website portfolio dengan performa optimal dan sistem manajemen konten yang mudah digunakan.</p>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
+            </section>
 
-        <?php if (!empty($projects) && count($projects) > 6): ?>
-        <div class="text-center mt-12">
-            <a href="<?= base_url('/projects') ?>" class="cta-button inline-block">
-                Lihat Semua Project
-            </a>
-        </div>
-        <?php endif; ?>
-    </div>
-</section>
-
-            <!-- Contact Section -->
             <section id="kontak" class="py-20 px-6">
                 <div class="max-w-4xl mx-auto">
                     <div class="glassmorphism rounded-3xl p-8 md:p-12">
@@ -605,7 +516,6 @@
                             <p class="text-white/60 text-lg">Saya tertarik mendengar tentang proyek Anda</p>
                         </div>
 
-                        <!-- Contact Info -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                             <div class="text-center">
                                 <div class="size-12 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -624,8 +534,21 @@
                             </div>
                         </div>
 
-                        <!-- Contact Form -->
-                        <form class="space-y-6" action="/contact" method="POST">
+                        <?php if (session()->getFlashdata('success')): ?>
+                            <div class="bg-green-500/20 border border-green-500/50 text-green-300 px-4 py-3 rounded-lg mb-6 text-center">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <?= session()->getFlashdata('success') ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (session()->getFlashdata('error')): ?>
+                            <div class="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg mb-6 text-center">
+                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                <?= session()->getFlashdata('error') ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <form class="space-y-6" action="<?= base_url('/contact') ?>" method="POST">
                             <?= csrf_field() ?>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -648,7 +571,7 @@
                             </div>
                             
                             <button type="submit" 
-                                    class="w-full bg-white text-black py-3 rounded-lg font-medium hover:bg-white/90 transition-colors">
+                                    class="w-full bg-white text-black py-3 rounded-lg font-medium hover:bg-white/90 transition-colors duration-300">
                                 Kirim Pesan
                             </button>
                         </form>
@@ -668,7 +591,6 @@
                     <div class="logo-icon">
                         <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
                     </div>
-                    <h3 class="logo-text text-xl text-white"><?= $site_info['name'] ?? 'Portfolio' ?></h3>
                 </div>
                 <p class="text-[#A0A0A0] text-sm leading-relaxed max-w-md mb-6">
                     <?= $site_info['short_description'] ?? 'Membangun solusi digital yang inovatif dan berdampak dengan teknologi terkini.' ?>
@@ -703,12 +625,15 @@
                             <?php endif; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <!-- Fallback default social links -->
+                        <!-- Fallback default social links dengan Instagram dan Twitter -->
+                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
                         <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="GitHub">
-                            <i class="fab fa-github"></i>
+                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Twitter">
+                            <i class="fab fa-twitter"></i>
                         </a>
                         <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -721,10 +646,22 @@
             <div>
                 <h4 class="text-white font-semibold mb-4 text-lg">Navigasi</h4>
                 <div class="space-y-3">
-                    <a href="/#proyek" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1">Proyek</a>
-                    <a href="/#tentang" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1">Tentang Saya</a>
-                    <a href="/#kontak" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1">Kontak</a>
-                    <a href="/admin/login" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1">Login Admin</a>
+                    <a href="/#proyek" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        Proyek
+                    </a>
+                    <a href="/#tentang" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        Tentang Saya
+                    </a>
+                    <a href="/#kontak" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        Kontak
+                    </a>
+                    <a href="/admin/login" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        Login Admin
+                    </a>
                 </div>
             </div>
 
@@ -732,38 +669,48 @@
             <div>
                 <h4 class="text-white font-semibold mb-4 text-lg">Kontak</h4>
                 <div class="space-y-3 text-sm">
-                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400">
-                        <i class="fas fa-envelope mr-2"></i><?= $site_info['email'] ?? 'hello@example.com' ?>
+                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                        <i class="fas fa-envelope mr-2 text-purple-400"></i>
+                        <span class="group-hover:text-purple-400 transition-colors">
+                            <?= $site_info['email'] ?? 'hello@example.com' ?>
+                        </span>
                     </p>
-                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400">
-                        <i class="fas fa-phone mr-2"></i><?= $site_info['phone'] ?? '+62 812 3456 7890' ?>
+                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                        <i class="fas fa-phone mr-2 text-purple-400"></i>
+                        <span class="group-hover:text-purple-400 transition-colors">
+                            <?= $site_info['phone'] ?? '+62 812 3456 7890' ?>
+                        </span>
                     </p>
-                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400">
-                        <i class="fas fa-map-marker-alt mr-2"></i><?= $site_info['location'] ?? 'Indonesia' ?>
+                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                        <i class="fas fa-map-marker-alt mr-2 text-purple-400"></i>
+                        <span class="group-hover:text-purple-400 transition-colors">
+                            <?= $site_info['location'] ?? 'Indonesia' ?>
+                        </span>
                     </p>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Footer -->
-        <div class="border-t border-white/10 pt-8">
+        <div class="border-t border-purple-500/20 pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-[#A0A0A0] text-sm text-center md:text-left">
                     © <?= date('Y') ?> <?= $site_info['name'] ?? 'Rifki Maulana' ?>. All rights reserved.
                 </p>
                 <div class="flex items-center gap-6 text-sm">
-                    <a href="/privacy" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400">Privacy</a>
-                    <a href="/terms" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400">Terms</a>
-                    <a href="/sitemap" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400">Sitemap</a>
+                    <a href="/privacy" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Privacy</a>
+                    <a href="/terms" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Terms</a>
+                    <a href="/sitemap" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Sitemap</a>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+
     </div>
 
     <script>
-        // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -773,7 +720,6 @@
             }
         });
 
-        // Mobile navigation
         const hamburgerMenu = document.getElementById('hamburgerMenu');
         const mobileNavOverlay = document.getElementById('mobileNavOverlay');
         
@@ -793,38 +739,12 @@
             hamburgerMenu.addEventListener('click', openMobileNav);
         }
         
-        // Close mobile nav when clicking outside
         mobileNavOverlay.addEventListener('click', function(e) {
             if (e.target === mobileNavOverlay) {
                 closeMobileNav();
             }
         });
 
-        // Active nav link based on scroll position
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        function setActiveNavLink() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', setActiveNavLink);
-
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -837,40 +757,6 @@
                     closeMobileNav();
                 }
             });
-        });
-
-        // Form submission loading state
-        const contactForm = document.querySelector('form[action="/contact"]');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function() {
-                const submitButton = this.querySelector('button[type="submit"]');
-                if (submitButton) {
-                    submitButton.innerHTML = 'Mengirim...';
-                    submitButton.disabled = true;
-                }
-            });
-        }
-
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        // Observe elements for animation
-        document.querySelectorAll('.glassmorphism').forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            setTimeout(() => {
-                observer.observe(el);
-            }, index * 100);
         });
     </script>
 </body>

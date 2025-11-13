@@ -21,4 +21,6 @@ class ContactModel extends Model
     {
         return $this->orderBy('created_at', 'DESC')->findAll();
     }
+    
 }
+

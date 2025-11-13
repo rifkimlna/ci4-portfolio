@@ -20,7 +20,7 @@
         
         .glassmorphism-hover:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(168, 85, 247, 0.3);
             transition: all 0.3s ease;
         }
         
@@ -44,7 +44,7 @@
             background-color: #0A0A0A;
         }
         
-        /* Animations */
+        /* Purple Accent Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -60,6 +60,20 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
         
+        /* Input focus with purple accent */
+        .input-focus:focus {
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        }
+        
+        /* Purple gradient text */
+        .text-purple-gradient {
+            background: linear-gradient(135deg, #a855f7, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 1024px) {
             .split-layout {
@@ -84,6 +98,8 @@
                     colors: {
                         "primary-accent": "#A0A0A0",
                         "background-dark": "#0A0A0A",
+                        "purple-accent": "#a855f7",
+                        "purple-light": "#c084fc",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
@@ -119,19 +135,19 @@
                 <div class="max-w-2xl text-center lg:text-left">
                     <!-- Logo -->
                     <div class="flex items-center justify-center lg:justify-start gap-3 mb-8">
-                        <div class="size-8 text-white">
+                        <div class="size-8 text-purple-400">
                             <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                                 <path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <h1 class="text-white text-2xl font-semibold"><?= $site_info['name'] ?? 'Portfolio' ?></h1>
+                        <h1 class="text-purple-400 text-2xl font-semibold"><?= $site_info['name'] ?? 'Portfolio' ?></h1>
                     </div>
 
                     <!-- Hero Text -->
                     <div class="space-y-6 mb-8">
                         <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light tracking-tight">
                             <span class="block text-white">Admin</span>
-                            <span class="block text-white/70">Dashboard</span>
+                            <span class="block text-purple-gradient">Dashboard</span>
                         </h2>
                         <p class="text-white/60 text-lg lg:text-xl leading-relaxed max-w-xl">
                             Kelola portofolio dan proyek Anda dengan antarmuka yang powerful dan intuitif.
@@ -140,16 +156,16 @@
 
                     <!-- Features List -->
                     <div class="space-y-4">
-                        <div class="flex items-center justify-center lg:justify-start gap-3 text-white/60">
-                            <i class="fas fa-check-circle text-green-400"></i>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 text-white/60 hover:text-purple-300 transition-colors">
+                            <i class="fas fa-check-circle text-purple-400"></i>
                             <span>Kelola proyek dan skills</span>
                         </div>
-                        <div class="flex items-center justify-center lg:justify-start gap-3 text-white/60">
-                            <i class="fas fa-check-circle text-green-400"></i>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 text-white/60 hover:text-purple-300 transition-colors">
+                            <i class="fas fa-check-circle text-purple-400"></i>
                             <span>Update informasi kontak</span>
                         </div>
-                        <div class="flex items-center justify-center lg:justify-start gap-3 text-white/60">
-                            <i class="fas fa-check-circle text-green-400"></i>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 text-white/60 hover:text-purple-300 transition-colors">
+                            <i class="fas fa-check-circle text-purple-400"></i>
                             <span>Pantau pesan dari pengunjung</span>
                         </div>
                     </div>
@@ -162,21 +178,21 @@
                     <div class="glassmorphism p-8 rounded-3xl transition-all duration-300">
                         <!-- Form Header -->
                         <div class="text-center mb-8">
-                            <h2 class="text-3xl font-light text-white mb-2">Admin Login</h2>
+                            <h2 class="text-3xl font-light text-white mb-2">Admin <span class="text-purple-400">Login</span></h2>
                             <p class="text-white/60">Masuk ke dashboard admin</p>
                         </div>
 
                         <!-- Flash Messages -->
                         <?php if (session()->getFlashdata('error')): ?>
-                            <div class="glassmorphism bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg mb-4 text-sm">
-                                <i class="fas fa-exclamation-circle mr-2"></i>
+                            <div class="glassmorphism bg-red-500/20 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg mb-4 text-sm">
+                                <i class="fas fa-exclamation-circle mr-2 text-purple-300"></i>
                                 <?= session()->getFlashdata('error') ?>
                             </div>
                         <?php endif; ?>
 
                         <?php if (session()->getFlashdata('success')): ?>
-                            <div class="glassmorphism bg-green-500/20 border border-green-500 text-green-300 px-4 py-3 rounded-lg mb-4 text-sm">
-                                <i class="fas fa-check-circle mr-2"></i>
+                            <div class="glassmorphism bg-green-500/20 border border-green-500/30 text-green-300 px-4 py-3 rounded-lg mb-4 text-sm">
+                                <i class="fas fa-check-circle mr-2 text-purple-300"></i>
                                 <?= session()->getFlashdata('success') ?>
                             </div>
                         <?php endif; ?>
@@ -187,26 +203,26 @@
                             
                             <div>
                                 <label for="email" class="block text-sm font-medium text-white/70 mb-3">
-                                    Email
+                                    <i class="fas fa-envelope mr-2 text-purple-400"></i>Email
                                 </label>
                                 <input type="email" id="email" name="email" required 
                                        value="<?= old('email') ?>"
-                                       class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                                       class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none input-focus transition-all"
                                        placeholder="email@example.com">
                             </div>
 
                             <div>
                                 <label for="password" class="block text-sm font-medium text-white/70 mb-3">
-                                    Password
+                                    <i class="fas fa-lock mr-2 text-purple-400"></i>Password
                                 </label>
                                 <input type="password" id="password" name="password" required 
-                                       class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                                       class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none input-focus transition-all"
                                        placeholder="Masukkan password">
                             </div>
 
                             <div class="mt-8">
-                                <button type="submit" class="w-full bg-white text-black py-3 rounded-lg font-medium hover:bg-white/90 transition-colors">
-                                    Login
+                                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-purple-800 transition-all duration-300 transform hover:-translate-y-0.5">
+                                    <i class="fas fa-sign-in-alt mr-2"></i>Login
                                 </button>
                             </div>
                         </form>
@@ -215,7 +231,7 @@
                         <div class="mt-6 text-center">
                             <p class="text-white/60 text-sm">
                                 Belum punya akun? 
-                                <a href="/admin/register" class="text-white hover:text-white/80 font-medium transition-colors">
+                                <a href="/admin/register" class="text-purple-400 hover:text-purple-300 font-medium transition-colors">
                                     Daftar di sini
                                 </a>
                             </p>
@@ -223,7 +239,7 @@
 
                         <!-- Back to Home -->
                         <div class="mt-6 text-center">
-                            <a href="/" class="text-white/60 hover:text-white transition-colors text-sm inline-flex items-center gap-2">
+                            <a href="/" class="text-white/60 hover:text-purple-300 transition-colors text-sm inline-flex items-center gap-2">
                                 <i class="fas fa-arrow-left"></i>
                                 Kembali ke Beranda
                             </a>
@@ -241,19 +257,19 @@
             loginForm.addEventListener('submit', function() {
                 const submitButton = this.querySelector('button[type="submit"]');
                 if (submitButton) {
-                    submitButton.innerHTML = 'Memproses...';
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
                     submitButton.disabled = true;
                 }
             });
         }
 
-        // Smooth focus transitions for inputs
+        // Smooth focus transitions for inputs with purple accent
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('focus', function() {
-                this.classList.add('ring-2', 'ring-white/20');
+                this.classList.add('ring-2', 'ring-purple-500/20');
             });
             input.addEventListener('blur', function() {
-                this.classList.remove('ring-2', 'ring-white/20');
+                this.classList.remove('ring-2', 'ring-purple-500/20');
             });
         });
 

@@ -65,5 +65,17 @@ $routes->group('admin', function($routes) {
         $routes->get('contacts', 'Admin\Contacts::index');
         $routes->post('contacts/read/(:num)', 'Admin\Contacts::markAsRead/$1');
         $routes->post('contacts/delete/(:num)', 'Admin\Contacts::delete/$1');
+
+        // Route untuk form contact (PUBLIC)
+
+        // Contact Form Routes
+
+        // Di app/Config/Routes.php
+$routes->post('/contact', 'Admin\Contacts::submit');
+
+
+
+        
+
     });
 });

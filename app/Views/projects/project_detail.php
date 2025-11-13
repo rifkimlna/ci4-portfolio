@@ -45,22 +45,168 @@
         .footer-gradient {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
         }
-
+        
         .social-icon {
             transition: all 0.3s ease;
         }
-
+        
         .social-icon:hover {
             color: #a855f7 !important;
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.1);
         }
-
+        
         .footer-link {
             transition: all 0.3s ease;
+            position: relative;
         }
-
+        
         .footer-link:hover {
             color: #a855f7 !important;
+            transform: translateX(8px);
+        }
+        
+        .footer-link.group {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* MacBook Style Preview */
+        .macbook-frame {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .macbook-screen {
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .macbook-notch {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 6px;
+            background: #333;
+            border-radius: 0 0 4px 4px;
+            z-index: 10;
+        }
+
+        .macbook-stand {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            margin-top: -10px;
+        }
+
+        .macbook-stand::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 8px;
+            background: linear-gradient(90deg, #333, #555, #333);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .macbook-base {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(180deg, #333, #222);
+            border-radius: 0 0 8px 8px;
+            margin-top: -2px;
+        }
+
+        .project-image-full {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image-full:hover {
+            transform: scale(1.01);
         }
     </style>
 </head>
@@ -73,19 +219,20 @@
                 <div class="flex items-center">
                     <a href="/" class="flex items-center gap-3">
                         <img src="/assets/icons/logoporto.svg" alt="Logo" class="w-8 h-8">
-                        
+                        <span class="logo-text text-xl"><?= $site_info['name'] ?? 'Portfolio' ?></span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-gray-400 hover:text-purple-400 transition-colors">Home</a>
-                    <a href="/projects" class="text-gray-400 hover:text-purple-400 transition-colors">All Projects</a>
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/projects" class="nav-link">All Projects</a>
+                    <a href="/#kontak" class="nav-link">Contact</a>
                 </div>
 
                 <!-- CTA Button -->
                 <div class="hidden md:flex items-center">
-                    <a href="/#kontak" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all">
+                    <a href="/#kontak" class="cta-button">
                         Get In Touch
                     </a>
                 </div>
@@ -150,11 +297,16 @@
                     </div>
                 </div>
 
-                <!-- Project Image -->
-                <div class="rounded-2xl overflow-hidden mb-12 border border-gray-800">
-                    <img src="<?= $project['image_display_url'] ?>" 
-                         alt="<?= $project['title'] ?>" 
-                         class="w-full h-96 object-cover gallery-image">
+                <!-- MacBook Style Project Preview -->
+                <div class="macbook-frame">
+                    <div class="macbook-notch"></div>
+                    <div class="macbook-screen">
+                        <img src="<?= $project['image_display_url'] ?>" 
+                             alt="<?= $project['title'] ?>" 
+                             class="project-image-full">
+                    </div>
+                    <div class="macbook-stand"></div>
+                    <div class="macbook-base"></div>
                 </div>
             </div>
         </section>
@@ -244,36 +396,51 @@
                         <div class="logo-icon">
                             <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
                         </div>
-                        <h3 class="logo-text text-xl text-white"><?= $site_info['name'] ?? 'Portfolio' ?></h3>
                     </div>
                     <p class="text-[#A0A0A0] text-sm leading-relaxed max-w-md mb-6">
-                        Membangun solusi digital yang inovatif dan berdampak dengan teknologi terkini.
+                        <?= $site_info['short_description'] ?? 'Membangun solusi digital yang inovatif dan berdampak dengan teknologi terkini.' ?>
                     </p>
                     <div class="flex gap-4">
                         <?php if (!empty($social_links)): ?>
                             <?php foreach ($social_links as $link): ?>
-                                <a href="<?= $link['url'] ?>" target="_blank" 
-                                   class="social-icon text-[#A0A0A0] text-lg"
-                                   title="<?= $link['platform'] ?>">
-                                    <?php if ($link['platform'] === 'LinkedIn'): ?>
-                                        <i class="fab fa-linkedin-in"></i>
-                                    <?php elseif ($link['platform'] === 'GitHub'): ?>
-                                        <i class="fab fa-github"></i>
-                                    <?php elseif ($link['platform'] === 'Twitter'): ?>
-                                        <i class="fab fa-twitter"></i>
-                                    <?php else: ?>
-                                        <i class="fas fa-globe"></i>
-                                    <?php endif; ?>
-                                </a>
+                                <?php if ($link['is_active'] && !empty($link['url'])): ?>
+                                    <a href="<?= $link['url'] ?>" target="_blank" 
+                                       class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110"
+                                       title="<?= $link['platform'] ?>">
+                                        <?php if ($link['platform'] === 'LinkedIn'): ?>
+                                            <i class="fab fa-linkedin-in"></i>
+                                        <?php elseif ($link['platform'] === 'GitHub'): ?>
+                                            <i class="fab fa-github"></i>
+                                        <?php elseif ($link['platform'] === 'Twitter'): ?>
+                                            <i class="fab fa-twitter"></i>
+                                        <?php elseif ($link['platform'] === 'Instagram'): ?>
+                                            <i class="fab fa-instagram"></i>
+                                        <?php elseif ($link['platform'] === 'Facebook'): ?>
+                                            <i class="fab fa-facebook"></i>
+                                        <?php elseif ($link['platform'] === 'YouTube'): ?>
+                                            <i class="fab fa-youtube"></i>
+                                        <?php elseif ($link['platform'] === 'Dribbble'): ?>
+                                            <i class="fab fa-dribbble"></i>
+                                        <?php elseif ($link['platform'] === 'Behance'): ?>
+                                            <i class="fab fa-behance"></i>
+                                        <?php else: ?>
+                                            <i class="fas fa-globe"></i>
+                                        <?php endif; ?>
+                                    </a>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <a href="#" class="social-icon text-[#A0A0A0] text-lg" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="social-icon text-[#A0A0A0] text-lg" title="GitHub">
+                            <!-- Fallback default social links dengan Instagram dan Twitter -->
+                            <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#" class="social-icon text-[#A0A0A0] text-lg" title="Instagram">
+                            <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         <?php endif; ?>
@@ -284,10 +451,22 @@
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-lg">Navigasi</h4>
                     <div class="space-y-3">
-                        <a href="/#proyek" class="footer-link block text-[#A0A0A0] text-sm">Proyek</a>
-                        <a href="/#tentang" class="footer-link block text-[#A0A0A0] text-sm">Tentang Saya</a>
-                        <a href="/#kontak" class="footer-link block text-[#A0A0A0] text-sm">Kontak</a>
-                        <a href="/admin/login" class="footer-link block text-[#A0A0A0] text-sm">Login Admin</a>
+                        <a href="/#proyek" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Proyek
+                        </a>
+                        <a href="/#tentang" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Tentang Saya
+                        </a>
+                        <a href="/#kontak" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Kontak
+                        </a>
+                        <a href="/admin/login" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Login Admin
+                        </a>
                     </div>
                 </div>
 
@@ -295,23 +474,38 @@
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-lg">Kontak</h4>
                     <div class="space-y-3 text-sm">
-                        <p class="text-[#A0A0A0]"><?= $site_info['email'] ?? 'hello@example.com' ?></p>
-                        <p class="text-[#A0A0A0]"><?= $site_info['phone'] ?? '+62 812 3456 7890' ?></p>
-                        <p class="text-[#A0A0A0]">Indonesia</p>
+                        <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                            <i class="fas fa-envelope mr-2 text-purple-400"></i>
+                            <span class="group-hover:text-purple-400 transition-colors">
+                                <?= $site_info['email'] ?? 'hello@example.com' ?>
+                            </span>
+                        </p>
+                        <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                            <i class="fas fa-phone mr-2 text-purple-400"></i>
+                            <span class="group-hover:text-purple-400 transition-colors">
+                                <?= $site_info['phone'] ?? '+62 812 3456 7890' ?>
+                            </span>
+                        </p>
+                        <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                            <i class="fas fa-map-marker-alt mr-2 text-purple-400"></i>
+                            <span class="group-hover:text-purple-400 transition-colors">
+                                <?= $site_info['location'] ?? 'Indonesia' ?>
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
 
             <!-- Bottom Footer -->
-            <div class="border-t border-white/10 pt-8">
+            <div class="border-t border-purple-500/20 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <p class="text-[#A0A0A0] text-sm text-center md:text-left">
-                        © 2024 <?= $site_info['name'] ?? 'Rifki Maulana' ?>. All rights reserved.
+                        © <?= date('Y') ?> <?= $site_info['name'] ?? 'Rifki Maulana' ?>. All rights reserved.
                     </p>
                     <div class="flex items-center gap-6 text-sm">
-                        <a href="/privacy" class="footer-link text-[#A0A0A0]">Privacy</a>
-                        <a href="/terms" class="footer-link text-[#A0A0A0]">Terms</a>
-                        <a href="/sitemap" class="footer-link text-[#A0A0A0]">Sitemap</a>
+                        <a href="/privacy" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Privacy</a>
+                        <a href="/terms" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Terms</a>
+                        <a href="/sitemap" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Sitemap</a>
                     </div>
                 </div>
             </div>
@@ -319,15 +513,15 @@
     </footer>
 
     <script>
-        // Simple image zoom effect
+        // Simple image zoom effect for MacBook preview
         document.addEventListener('DOMContentLoaded', function() {
-            const galleryImages = document.querySelectorAll('.gallery-image');
+            const projectImage = document.querySelector('.project-image-full');
             
-            galleryImages.forEach(img => {
-                img.addEventListener('click', function() {
-                    this.classList.toggle('scale-105');
+            if (projectImage) {
+                projectImage.addEventListener('click', function() {
+                    this.classList.toggle('scale-110');
                 });
-            });
+            }
         });
     </script>
 </body>
