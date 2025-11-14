@@ -20,7 +20,6 @@
         .glassmorphism-hover:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
         }
         
         .bg-background-dark {
@@ -30,7 +29,6 @@
         /* Mobile menu styles */
         .mobile-menu {
             transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
         }
         .mobile-menu.active {
             transform: translateX(0);
@@ -53,22 +51,6 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         /* Chart styling */
@@ -152,27 +134,27 @@
 
                         <!-- Main Navigation -->
                         <nav class="flex flex-col gap-2">
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-white font-medium transition-all" href="/admin/dashboard">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-white font-medium" href="/admin/dashboard">
                                 <span class="material-symbols-outlined text-lg">dashboard</span>
                                 <p class="text-sm font-medium leading-normal">Dashboard</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/site-info">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white" href="/admin/site-info">
                                 <span class="material-symbols-outlined text-lg">info</span>
                                 <p class="text-sm font-medium leading-normal">Site Info</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/projects">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white" href="/admin/projects">
                                 <span class="material-symbols-outlined text-lg">folder</span>
                                 <p class="text-sm font-medium leading-normal">Projects</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/skills">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white" href="/admin/skills">
                                 <span class="material-symbols-outlined text-lg">code</span>
                                 <p class="text-sm font-medium leading-normal">Skills</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/social-links">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white" href="/admin/social-links">
                                 <span class="material-symbols-outlined text-lg">share</span>
                                 <p class="text-sm font-medium leading-normal">Social Links</p>
                             </a>
-                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all" href="/admin/contacts">
+                            <a class="nav-item flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white" href="/admin/contacts">
                                 <span class="material-symbols-outlined text-lg">mail</span>
                                 <p class="text-sm font-medium leading-normal">Messages</p>
                             </a>
@@ -181,11 +163,11 @@
 
                     <!-- Bottom Actions -->
                     <div class="flex flex-col gap-2">
-                        <button id="theme-toggle" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all">
+                        <button id="theme-toggle" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white">
                             <span class="material-symbols-outlined text-lg">dark_mode</span>
                             <p class="text-sm font-medium leading-normal">Toggle Theme</p>
                         </button>
-                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-red-500/20 hover:text-red-400 transition-all" href="/admin/logout">
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-red-500/20 hover:text-red-400" href="/admin/logout">
                             <span class="material-symbols-outlined text-lg">logout</span>
                             <p class="text-sm font-medium leading-normal">Logout</p>
                         </a>
@@ -282,14 +264,14 @@
                         <div class="lg:col-span-1 glassmorphism rounded-2xl p-6">
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-white text-xl font-light">Pesan Terbaru</h2>
-                                <a href="/admin/contacts" class="text-white/60 hover:text-white text-sm transition-colors">
+                                <a href="/admin/contacts" class="text-white/60 hover:text-white text-sm">
                                     Lihat semua
                                 </a>
                             </div>
                             <div class="space-y-4 max-h-[300px] overflow-y-auto">
                                 <?php if (!empty($recent_contacts)): ?>
                                     <?php foreach ($recent_contacts as $contact): ?>
-                                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
+                                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5">
                                             <div class="bg-white/10 rounded-full size-10 flex items-center justify-center flex-shrink-0">
                                                 <span class="material-symbols-outlined text-white text-sm">person</span>
                                             </div>
@@ -307,7 +289,7 @@
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <!-- Fallback messages -->
-                                    <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5">
                                         <div class="bg-white/10 rounded-full size-10 flex items-center justify-center flex-shrink-0">
                                             <span class="material-symbols-outlined text-white text-sm">person</span>
                                         </div>
@@ -316,7 +298,7 @@
                                             <p class="text-white/60 text-xs mt-1 line-clamp-2">Tolong untuk bisa menjadi yang terbaik dalam bidang ini...</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5">
                                         <div class="bg-white/10 rounded-full size-10 flex items-center justify-center flex-shrink-0">
                                             <span class="material-symbols-outlined text-white text-sm">person</span>
                                         </div>
@@ -337,7 +319,7 @@
                                 <h2 class="text-white text-xl font-light">Tambah Projek Baru</h2>
                                 <p class="text-white/60 text-sm mt-1">Mulai proyek portfolio baru Anda</p>
                             </div>
-                            <a href="/admin/projects" class="bg-white text-black text-sm font-medium py-3 px-6 rounded-lg hover:bg-white/90 transition-colors inline-flex items-center justify-center gap-2 w-full sm:w-auto">
+                            <a href="/admin/projects" class="bg-white text-black text-sm font-medium py-3 px-6 rounded-lg hover:bg-white/90 inline-flex items-center justify-center gap-2 w-full sm:w-auto">
                                 <span class="material-symbols-outlined text-lg">add</span>
                                 Tambah Projek
                             </a>
@@ -417,19 +399,6 @@
                     item.classList.add('bg-white/10', 'text-white');
                     item.classList.remove('text-white/60');
                 }
-            });
-
-            // Add animations
-            const elements = document.querySelectorAll('.glassmorphism');
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 100);
             });
         });
 

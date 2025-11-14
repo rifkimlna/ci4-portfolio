@@ -9,8 +9,28 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Spline Runtime -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js"></script>
 
     <style>
+        /* === SPLINE BACKGROUND STYLES === */
+        #spline-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #0a0a0a;
+        }
+
+        spline-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* === STYLING AWAL ANDA - TIDAK DIUBAH === */
         .glassmorphism {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
@@ -24,16 +44,6 @@
             transition: all 0.3s ease;
         }
         
-        spline-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
         .content-overlay {
             position: relative;
             z-index: 10;
@@ -44,70 +54,93 @@
             background-color: #0A0A0A;
         }
         
+        /* NAVBAR COMPACT STYLING DENGAN SPACING YANG DIPERBAIKI */
         .navbar-full {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: auto;
+            max-width: 90%;
         }
         
         .navbar-full.scrolled {
             background: rgba(10, 10, 10, 0.95);
-            border-bottom-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            top: 10px;
+            padding: 0.5rem 1.25rem;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 10.5rem;
+        }
+        
+        .logo-compact {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.25rem 0;
+             flex-shrink: 0;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .nav-link {
             position: relative;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             color: rgba(255, 255, 255, 0.7);
             transition: all 0.3s ease;
             font-weight: 500;
+            border-radius: 25px;
+            font-size: 0.95rem;
         }
         
         .nav-link:hover {
             color: white;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .nav-link:hover::after {
-            width: 80%;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .nav-link.active {
             color: white;
-        }
-        
-        .nav-link.active::after {
-            width: 80%;
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .cta-button {
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .cta-button::before {
@@ -128,31 +161,6 @@
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 0;
-        }
-        
-        .logo-icon {
-            width: 2rem;
-            height: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.25rem;
-            background: linear-gradient(135deg, #ffffff, #a5b4fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .mobile-nav-overlay {
@@ -235,12 +243,6 @@
             top: 9px;
         }
 
-        .nav-center {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -257,6 +259,8 @@
         }
 
         @media (max-width: 768px) {
+
+            
             .hero-title {
                 font-size: 2.5rem !important;
             }
@@ -265,16 +269,24 @@
                 font-size: 2rem !important;
             }
             
-            .nav-center {
+            .nav-links {
                 display: none;
             }
             
-            .nav-actions {
+            .cta-button {
                 display: none;
             }
             
             .logo-text {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+            
+            .navbar-full {
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .nav-container {
+                gap: 1rem;
             }
         }
 
@@ -284,35 +296,33 @@
             }
         }
 
-
-
-         .footer-gradient {
-        background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
-    }
-    
-    .social-icon {
-        transition: all 0.3s ease;
-    }
-    
-    .social-icon:hover {
-        color: #a855f7 !important;
-        transform: translateY(-2px) scale(1.1);
-    }
-    
-    .footer-link {
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    
-    .footer-link:hover {
-        color: #a855f7 !important;
-        transform: translateX(8px);
-    }
-    
-    .footer-link.group {
-        display: flex;
-        align-items: center;
-    }
+        .footer-gradient {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: #a855f7 !important;
+            transform: translateY(-2px) scale(1.1);
+        }
+        
+        .footer-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-link:hover {
+            color: #a855f7 !important;
+            transform: translateX(8px);
+        }
+        
+        .footer-link.group {
+            display: flex;
+            align-items: center;
+        }
     </style>
     
     <script>
@@ -331,46 +341,39 @@
             },
         }
     </script>
-    
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.95/build/spline-viewer.js"></script>
 </head>
 <body class="bg-background-dark font-display text-white antialiased">
 
-    <spline-viewer 
-        url="https://prod.spline.design/lPtouUjIBDltsZ5Z/scene.splinecode"
-        hide-watermark
-        background="transparent">
-    </spline-viewer>
+    <!-- === SPLINE BACKGROUND === -->
+    <!-- <div id="spline-background">
+        <spline-viewer url="https://prod.spline.design/RovNnRi129BxbO8P/scene.splinecode"></spline-viewer>
+    </div> -->
 
+    <!-- === KODE AWAL ANDA - TIDAK DIUBAH === -->
     <div class="content-overlay">
+        <!-- COMPACT NAVBAR DENGAN SPACING YANG DIPERBAIKI -->
         <nav class="navbar-full" id="navbar">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center flex-shrink-0">
-                        <div class="logo-container">
-                            <div class="logo-icon">
-                                <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
-                            </div>
-                        </div>
+            <div class="nav-container">
+                <div class="logo-compact">
+                    <div class="logo-icon">
+                        <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-6 h-6">
                     </div>
-                    
-                    <div class="hidden md:flex items-center space-x-1 nav-center">
-                        <a href="#proyek" class="nav-link" data-section="proyek">Projects</a>
-                        <a href="#tentang" class="nav-link" data-section="tentang">About</a>
-                        <a href="#kontak" class="nav-link" data-section="kontak">Contacts</a>
-                    </div>
-                    
-                    <div class="hidden md:flex items-center flex-shrink-0">
-                        <a href="#kontak" class="cta-button text-sm">Hubungi Saya</a>
-                        <!-- <a href="/admin/login" class="nav-link">Login</a> -->
-                    </div>
-                    
-                    <div class="md:hidden flex items-center">
-                        <div class="hamburger-menu" id="hamburgerMenu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="/" class="nav-link active" data-section="home">Home</a>
+                    <a href="#proyek" class="nav-link" data-section="proyek">Projects</a>
+                    <a href="#tentang" class="nav-link" data-section="tentang">About</a>
+                    <a href="#kontak" class="nav-link" data-section="kontak">Contacts</a>
+                </div>
+                
+                <a href="#kontak" class="cta-button">Hubungi</a>
+                
+                <div class="md:hidden flex items-center">
+                    <div class="hamburger-menu" id="hamburgerMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>
@@ -378,10 +381,10 @@
 
         <div class="mobile-nav-overlay" id="mobileNavOverlay">
             <div class="mobile-nav-content">
+                <a href="#" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
                 <a href="#proyek" class="mobile-nav-link" onclick="closeMobileNav()">Projects</a>
                 <a href="#tentang" class="mobile-nav-link" onclick="closeMobileNav()">About</a>
                 <a href="#kontak" class="mobile-nav-link" onclick="closeMobileNav()">Contacts</a>
-                <!-- <a href="/admin/login" class="mobile-nav-link" onclick="closeMobileNav()">Login</a> -->
                 <a href="#kontak" class="cta-button mt-8 inline-block" onclick="closeMobileNav()">Hubungi Saya</a>
             </div>
         </div>
@@ -503,6 +506,28 @@
                                     <p class="text-white/70 text-sm leading-relaxed">Platform e-commerce modern dengan fitur real-time inventory.</p>
                                 </div>
                             </div>
+                            
+                            <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
+                                <div class="aspect-video bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
+                                    <span class="text-white/30 text-lg">Project Image</span>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-medium text-white mb-2">Task Management App</h3>
+                                    <p class="text-white/60 text-sm mb-3">Vue.js, Express, PostgreSQL</p>
+                                    <p class="text-white/70 text-sm leading-relaxed">Aplikasi manajemen tugas dengan kolaborasi tim real-time.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="group glassmorphism rounded-2xl overflow-hidden hover:glassmorphism-hover transition-all duration-300">
+                                <div class="aspect-video bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
+                                    <span class="text-white/30 text-lg">Project Image</span>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-medium text-white mb-2">Analytics Dashboard</h3>
+                                    <p class="text-white/60 text-sm mb-3">React, D3.js, Firebase</p>
+                                    <p class="text-white/70 text-sm leading-relaxed">Dashboard analitik dengan visualisasi data interaktif.</p>
+                                </div>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -581,136 +606,135 @@
         </div>
 
         <!-- FOOTER -->
-<footer class="footer-gradient mt-20 md:mt-24 lg:mt-32 pt-20 pb-8 px-6">
-    <div class="max-w-6xl mx-auto">
-        <!-- Main Footer Content -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
-            <!-- Brand Section -->
-            <div class="md:col-span-2">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="logo-icon">
-                        <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
-                    </div>
-                </div>
-                <p class="text-[#A0A0A0] text-sm leading-relaxed max-w-md mb-6">
-                    <?= $site_info['short_description'] ?? 'Membangun solusi digital yang inovatif dan berdampak dengan teknologi terkini.' ?>
-                </p>
-                <div class="flex gap-4">
-                    <?php if (!empty($social_links)): ?>
-                        <?php foreach ($social_links as $link): ?>
-                            <?php if ($link['is_active'] && !empty($link['url'])): ?>
-                                <a href="<?= $link['url'] ?>" target="_blank" 
-                                   class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110"
-                                   title="<?= $link['platform'] ?>">
-                                    <?php if ($link['platform'] === 'LinkedIn'): ?>
-                                        <i class="fab fa-linkedin-in"></i>
-                                    <?php elseif ($link['platform'] === 'GitHub'): ?>
-                                        <i class="fab fa-github"></i>
-                                    <?php elseif ($link['platform'] === 'Twitter'): ?>
-                                        <i class="fab fa-twitter"></i>
-                                    <?php elseif ($link['platform'] === 'Instagram'): ?>
-                                        <i class="fab fa-instagram"></i>
-                                    <?php elseif ($link['platform'] === 'Facebook'): ?>
-                                        <i class="fab fa-facebook"></i>
-                                    <?php elseif ($link['platform'] === 'YouTube'): ?>
-                                        <i class="fab fa-youtube"></i>
-                                    <?php elseif ($link['platform'] === 'Dribbble'): ?>
-                                        <i class="fab fa-dribbble"></i>
-                                    <?php elseif ($link['platform'] === 'Behance'): ?>
-                                        <i class="fab fa-behance"></i>
-                                    <?php else: ?>
-                                        <i class="fas fa-globe"></i>
+        <footer class="footer-gradient mt-20 md:mt-24 lg:mt-32 pt-20 pb-8 px-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- Main Footer Content -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
+                    <!-- Brand Section -->
+                    <div class="md:col-span-2">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="logo-icon">
+                                <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-8 h-8">
+                            </div>
+                        </div>
+                        <p class="text-[#A0A0A0] text-sm leading-relaxed max-w-md mb-6">
+                            <?= $site_info['short_description'] ?? 'Membangun solusi digital yang inovatif dan berdampak dengan teknologi terkini.' ?>
+                        </p>
+                        <div class="flex gap-4">
+                            <?php if (!empty($social_links)): ?>
+                                <?php foreach ($social_links as $link): ?>
+                                    <?php if ($link['is_active'] && !empty($link['url'])): ?>
+                                        <a href="<?= $link['url'] ?>" target="_blank" 
+                                           class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110"
+                                           title="<?= $link['platform'] ?>">
+                                            <?php if ($link['platform'] === 'LinkedIn'): ?>
+                                                <i class="fab fa-linkedin-in"></i>
+                                            <?php elseif ($link['platform'] === 'GitHub'): ?>
+                                                <i class="fab fa-github"></i>
+                                            <?php elseif ($link['platform'] === 'Twitter'): ?>
+                                                <i class="fab fa-twitter"></i>
+                                            <?php elseif ($link['platform'] === 'Instagram'): ?>
+                                                <i class="fab fa-instagram"></i>
+                                            <?php elseif ($link['platform'] === 'Facebook'): ?>
+                                                <i class="fab fa-facebook"></i>
+                                            <?php elseif ($link['platform'] === 'YouTube'): ?>
+                                                <i class="fab fa-youtube"></i>
+                                            <?php elseif ($link['platform'] === 'Dribbble'): ?>
+                                                <i class="fab fa-dribbble"></i>
+                                            <?php elseif ($link['platform'] === 'Behance'): ?>
+                                                <i class="fab fa-behance"></i>
+                                            <?php else: ?>
+                                                <i class="fas fa-globe"></i>
+                                            <?php endif; ?>
+                                        </a>
                                     <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <!-- Fallback default social links dengan Instagram dan Twitter -->
+                                <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Instagram">
+                                    <i class="fab fa-instagram"></i>
                                 </a>
                             <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <!-- Fallback default social links dengan Instagram dan Twitter -->
-                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon text-[#A0A0A0] text-lg transition-all duration-300 hover:text-purple-400 hover:scale-110" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="text-white font-semibold mb-4 text-lg">Navigasi</h4>
+                        <div class="space-y-3">
+                            <a href="/#proyek" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                Proyek
+                            </a>
+                            <a href="/#tentang" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                Tentang Saya
+                            </a>
+                            <a href="/#kontak" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                Kontak
+                            </a>
+                            <a href="/admin/login" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
+                                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                Login Admin
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div>
+                        <h4 class="text-white font-semibold mb-4 text-lg">Kontak</h4>
+                        <div class="space-y-3 text-sm">
+                            <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                                <i class="fas fa-envelope mr-2 text-purple-400"></i>
+                                <span class="group-hover:text-purple-400 transition-colors">
+                                    <?= $site_info['email'] ?? 'hello@example.com' ?>
+                                </span>
+                            </p>
+                            <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                                <i class="fas fa-phone mr-2 text-purple-400"></i>
+                                <span class="group-hover:text-purple-400 transition-colors">
+                                    <?= $site_info['phone'] ?? '+62 812 3456 7890' ?>
+                                </span>
+                            </p>
+                            <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
+                                <i class="fas fa-map-marker-alt mr-2 text-purple-400"></i>
+                                <span class="group-hover:text-purple-400 transition-colors">
+                                    <?= $site_info['location'] ?? 'Indonesia' ?>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Footer -->
+                <div class="border-t border-purple-500/20 pt-8">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p class="text-[#A0A0A0] text-sm text-center md:text-left">
+                            © <?= date('Y') ?> <?= $site_info['name'] ?? 'Rifki Maulana' ?>. All rights reserved.
+                        </p>
+                        <div class="flex items-center gap-6 text-sm">
+                            <a href="/privacy" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Privacy</a>
+                            <a href="/terms" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Terms</a>
+                            <a href="/sitemap" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Sitemap</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Quick Links -->
-            <div>
-                <h4 class="text-white font-semibold mb-4 text-lg">Navigasi</h4>
-                <div class="space-y-3">
-                    <a href="/#proyek" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
-                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        Proyek
-                    </a>
-                    <a href="/#tentang" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
-                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        Tentang Saya
-                    </a>
-                    <a href="/#kontak" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
-                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        Kontak
-                    </a>
-                    <a href="/admin/login" class="footer-link block text-[#A0A0A0] text-sm transition-all duration-300 hover:text-purple-400 hover:translate-x-1 flex items-center gap-2">
-                        <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        Login Admin
-                    </a>
-                </div>
-            </div>
-
-            <!-- Contact Info -->
-            <div>
-                <h4 class="text-white font-semibold mb-4 text-lg">Kontak</h4>
-                <div class="space-y-3 text-sm">
-                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
-                        <i class="fas fa-envelope mr-2 text-purple-400"></i>
-                        <span class="group-hover:text-purple-400 transition-colors">
-                            <?= $site_info['email'] ?? 'hello@example.com' ?>
-                        </span>
-                    </p>
-                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
-                        <i class="fas fa-phone mr-2 text-purple-400"></i>
-                        <span class="group-hover:text-purple-400 transition-colors">
-                            <?= $site_info['phone'] ?? '+62 812 3456 7890' ?>
-                        </span>
-                    </p>
-                    <p class="text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 group">
-                        <i class="fas fa-map-marker-alt mr-2 text-purple-400"></i>
-                        <span class="group-hover:text-purple-400 transition-colors">
-                            <?= $site_info['location'] ?? 'Indonesia' ?>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Footer -->
-        <div class="border-t border-purple-500/20 pt-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-[#A0A0A0] text-sm text-center md:text-left">
-                    © <?= date('Y') ?> <?= $site_info['name'] ?? 'Rifki Maulana' ?>. All rights reserved.
-                </p>
-                <div class="flex items-center gap-6 text-sm">
-                    <a href="/privacy" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Privacy</a>
-                    <a href="/terms" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Terms</a>
-                    <a href="/sitemap" class="footer-link text-[#A0A0A0] transition-all duration-300 hover:text-purple-400 hover:underline">Sitemap</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
+        </footer>
     </div>
 
     <script>
+        // === NAVBAR SCROLL EFFECT ===
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -756,6 +780,15 @@
                     });
                     closeMobileNav();
                 }
+            });
+        });
+
+        // Active nav link highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
             });
         });
     </script>

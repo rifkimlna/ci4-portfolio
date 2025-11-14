@@ -37,19 +37,19 @@
                 <div>
                     <label for="name" class="block text-sm font-medium text-white/70 mb-3">Nama *</label>
                     <input type="text" id="name" name="name" value="<?= $site_info['name'] ?? '' ?>" required
-                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
                            placeholder="Masukkan nama Anda">
                 </div>
                 <div>
                     <label for="title" class="block text-sm font-medium text-white/70 mb-3">Judul Profesi *</label>
                     <input type="text" id="title" name="title" value="<?= $site_info['title'] ?? '' ?>" required
-                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
                            placeholder="Contoh: Full-Stack Developer">
                 </div>
                 <div class="md:col-span-2">
                     <label for="bio" class="block text-sm font-medium text-white/70 mb-3">Bio Singkat (Hero Section) *</label>
                     <textarea id="bio" name="bio" rows="3" required
-                              class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all resize-none"
+                              class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 resize-none"
                               placeholder="Tulis bio singkat untuk hero section"><?= $site_info['bio'] ?? '' ?></textarea>
                     <p class="text-xs text-white/60 mt-2">
                         Bio ini akan ditampilkan di hero section bawah nama.
@@ -58,33 +58,33 @@
                 <div class="md:col-span-2">
                     <label for="about_description" class="block text-sm font-medium text-white/70 mb-3">Deskripsi Tentang Saya (Paragraf 1) *</label>
                     <textarea id="about_description" name="about_description" rows="4" required
-                              class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all resize-none"
+                              class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 resize-none"
                               placeholder="Tulis deskripsi tentang diri Anda (paragraf pertama)"><?= $site_info['about_description'] ?? 'Saya adalah seorang pengembang web yang bersemangat dalam mengubah ide-ide kompleks menjadi antarmuka yang elegan dan fungsional. Dengan pengalaman lebih dari 5 tahun, saya berspesialisasi dalam ekosistem JavaScript modern.' ?></textarea>
                 </div>
                 <div class="md:col-span-2">
                     <label for="about_experience" class="block text-sm font-medium text-white/70 mb-3">Pengalaman & Keahlian (Paragraf 2) *</label>
                     <textarea id="about_experience" name="about_experience" rows="4" required
-                              class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all resize-none"
+                              class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 resize-none"
                               placeholder="Tulis tentang pengalaman dan keahlian teknis Anda"><?= $site_info['about_experience'] ?? 'Fokus utama saya adalah pada pengembangan front-end menggunakan React dan Vue.js, memastikan pengalaman pengguna (UX) yang mulus. Di sisi back-end, saya terampil menggunakan Node.js dan Express, serta mengelola basis data NoSQL seperti MongoDB atau Firestore.' ?></textarea>
                 </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-white/70 mb-3">Email *</label>
                     <input type="email" id="email" name="email" value="<?= $site_info['email'] ?? '' ?>" required
-                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
                            placeholder="email@example.com">
                 </div>
                 <div>
                     <label for="phone" class="block text-sm font-medium text-white/70 mb-3">Telepon</label>
                     <input type="text" id="phone" name="phone" value="<?= $site_info['phone'] ?? '' ?>"
-                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
                            placeholder="+62 812-3456-7890">
                 </div>
             </div>
             <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                <button type="submit" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                <button type="submit" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 font-medium flex-1 flex items-center justify-center gap-2">
                     <i class="fas fa-save"></i>Update Informasi
                 </button>
-                <a href="/admin/dashboard" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors font-medium flex-1 text-center flex items-center justify-center gap-2">
+                <a href="/admin/dashboard" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 font-medium flex-1 text-center flex items-center justify-center gap-2">
                     <i class="fas fa-arrow-left"></i>Kembali
                 </a>
             </div>
@@ -182,21 +182,6 @@
                     }
                 }
             });
-        });
-    });
-
-    // Add animations
-    document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.glassmorphism');
-        elements.forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 100);
         });
     });
 </script>

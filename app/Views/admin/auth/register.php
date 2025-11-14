@@ -121,11 +121,11 @@
 <body class="bg-background-dark font-display text-white antialiased">
 
     <!-- BACKGROUND SPLINE -->
-    <spline-viewer 
+    <!-- <spline-viewer 
         url="https://prod.spline.design/lPtouUjIBDltsZ5Z/scene.splinecode"
         hide-watermark
         background="transparent">
-    </spline-viewer>
+    </spline-viewer> -->
 
     <!-- Content Overlay -->
     <div class="content-overlay">
@@ -147,7 +147,7 @@
                     <div class="space-y-6 mb-8">
                         <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light tracking-tight">
                             <span class="block text-white">Bergabung</span>
-                            <span class="block text-purple-gradient">Sekarang</span>
+                            <span class="block text-white">Sekarang</span>
                         </h2>
                         <p class="text-white/60 text-lg lg:text-xl leading-relaxed max-w-xl">
                             Buat akun admin untuk mulai mengelola portofolio dan proyek Anda dengan mudah.
@@ -178,7 +178,7 @@
                     <div class="glassmorphism p-8 rounded-3xl transition-all duration-300">
                         <!-- Form Header -->
                         <div class="text-center mb-8">
-                            <h2 class="text-3xl font-light text-white mb-2">Buat <span class="text-purple-400">Akun Baru</span></h2>
+                            <h2 class="text-3xl font-light text-white mb-2">Buat <span class="text-white-400">Akun Baru</span></h2>
                             <p class="text-white/60">Daftar untuk mengelola portfolio</p>
                         </div>
 

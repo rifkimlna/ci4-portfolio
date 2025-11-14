@@ -70,43 +70,99 @@
             align-items: center;
         }
 
+        /* NAVBAR YANG DISESUAIKAN */
+        .navbar-full {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: auto;
+            max-width: 90%;
+        }
+        
+        .navbar-full.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            top: 10px;
+            padding: 0.6rem 1.8rem;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10rem;
+        }
+        
+        .logo-compact {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.25rem 0;
+            flex-shrink: 0;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+        
         .nav-link {
             position: relative;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             color: rgba(255, 255, 255, 0.7);
             transition: all 0.3s ease;
             font-weight: 500;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
         
         .nav-link:hover {
             color: white;
+            background: rgba(255, 255, 255, 0.1);
         }
         
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+        .nav-link.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
         }
         
-        .nav-link:hover::after {
-            width: 80%;
-        }
-
         .cta-button {
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .cta-button::before {
@@ -128,17 +184,127 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
         }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.25rem;
-            background: linear-gradient(135deg, #ffffff, #a5b4fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            z-index: 999;
+            display: none;
+            backdrop-filter: blur(20px);
+        }
+        
+        .mobile-nav-overlay.active {
+            display: block;
+        }
+        
+        .mobile-nav-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            padding: 1rem 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-nav-link:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-nav-link:hover {
+            color: white;
+            transform: translateX(10px);
+        }
+        
+        .hamburger-menu {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu span:nth-child(1) { top: 0; }
+        .hamburger-menu span:nth-child(2) { top: 9px; }
+        .hamburger-menu span:nth-child(3) { top: 18px; }
+        
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 9px;
         }
 
-        /* MacBook Style Preview */
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 0.3rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-button {
+                display: none;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
+            }
+            
+            .navbar-full {
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .nav-container {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .logo-text {
+                display: none;
+            }
+        }
+
+        /* STYLING LAINNYA TETAP SAMA */
         .macbook-frame {
             background: #1a1a1a;
             border-radius: 20px;
@@ -211,34 +377,47 @@
     </style>
 </head>
 <body class="bg-[#0A0A0A] font-sans text-white antialiased">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center gap-3">
-                        <img src="/assets/icons/logoporto.svg" alt="Logo" class="w-8 h-8">
-                        <span class="logo-text text-xl"><?= $site_info['name'] ?? 'Portfolio' ?></span>
-                    </a>
+    
+    <!-- NAVBAR YANG DISESUAIKAN -->
+    <nav class="navbar-full" id="navbar">
+        <div class="nav-container">
+            <!-- Logo di kiri -->
+            <div class="logo-compact">
+                <div class="logo-icon">
+                    <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-6 h-6">
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="nav-link">Home</a>
-                    <a href="/projects" class="nav-link">All Projects</a>
-                    <a href="/#kontak" class="nav-link">Contact</a>
-                </div>
-
-                <!-- CTA Button -->
-                <div class="hidden md:flex items-center">
-                    <a href="/#kontak" class="cta-button">
-                        Get In Touch
-                    </a>
+                <span class="logo-text"></span>
+            </div>
+            
+            <!-- Menu navigasi di tengah -->
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/projects" class="nav-link active">All Projects</a>
+            </div>
+            
+            <!-- CTA Button di kanan -->
+            <a href="/#kontak" class="cta-button">Get In Touch</a>
+            
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <div class="mobile-nav-content">
+            <a href="/" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
+            <a href="/projects" class="mobile-nav-link" onclick="closeMobileNav()">All Projects</a>
+            <a href="/#kontak" class="mobile-nav-link" onclick="closeMobileNav()">Contact</a>
+            <a href="/#kontak" class="cta-button mt-8 inline-block" onclick="closeMobileNav()">Get In Touch</a>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="pt-20 min-h-screen">
@@ -267,7 +446,7 @@
                     <div class="flex flex-wrap items-center gap-6 mb-6">
                         <?php if ($project['demo_url']): ?>
                         <a href="<?= $project['demo_url'] ?>" target="_blank" 
-                           class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all flex items-center gap-2">
+                           class="border border-purple-600/50 text-purple-400 px-6 py-3 rounded-lg font-medium hover:border-purple-500 hover:text-purple-300 hover:bg-purple-600/10 transition-all flex items-center gap-2">
                             <i class="fas fa-external-link-alt"></i>
                             Live Demo
                         </a>
@@ -513,6 +692,65 @@
     </footer>
 
     <script>
+        // === NAVBAR SCROLL EFFECT ===
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        
+        function openMobileNav() {
+            hamburgerMenu.classList.add('active');
+            mobileNavOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileNav() {
+            hamburgerMenu.classList.remove('active');
+            mobileNavOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        if (hamburgerMenu) {
+            hamburgerMenu.addEventListener('click', openMobileNav);
+        }
+        
+        mobileNavOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileNavOverlay) {
+                closeMobileNav();
+            }
+        });
+
+        // Smooth scrolling untuk anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    closeMobileNav();
+                }
+            });
+        });
+
+        // Active nav link highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
         // Simple image zoom effect for MacBook preview
         document.addEventListener('DOMContentLoaded', function() {
             const projectImage = document.querySelector('.project-image-full');

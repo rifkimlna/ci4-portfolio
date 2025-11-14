@@ -21,7 +21,6 @@
         .glassmorphism-hover:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
         }
         
         .bg-background-dark {
@@ -31,7 +30,6 @@
         /* Mobile menu styles */
         .mobile-menu {
             transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
         }
         .mobile-menu.active {
             transform: translateX(0);
@@ -54,22 +52,6 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
         }
     </style>
     
@@ -138,27 +120,27 @@
 
                         <!-- Navigation -->
                         <nav class="flex flex-col gap-2">
-                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-white font-medium transition-all" href="/admin/dashboard">
+                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 text-white font-medium" href="/admin/dashboard">
                                 <span class="material-symbols-outlined text-lg">dashboard</span>
                                 <p class="text-sm font-medium leading-normal">Dashboard</p>
                             </a>
-                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all <?= strpos(current_url(), 'site-info') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/site-info">
+                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white <?= strpos(current_url(), 'site-info') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/site-info">
                                 <span class="material-symbols-outlined text-lg">info</span>
                                 <p class="text-sm font-medium leading-normal">Site Info</p>
                             </a>
-                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all <?= strpos(current_url(), 'projects') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/projects">
+                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white <?= strpos(current_url(), 'projects') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/projects">
                                 <span class="material-symbols-outlined text-lg">folder</span>
                                 <p class="text-sm font-medium leading-normal">Projects</p>
                             </a>
-                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all <?= strpos(current_url(), 'skills') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/skills">
+                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white <?= strpos(current_url(), 'skills') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/skills">
                                 <span class="material-symbols-outlined text-lg">code</span>
                                 <p class="text-sm font-medium leading-normal">Skills</p>
                             </a>
-                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all <?= strpos(current_url(), 'social-links') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/social-links">
+                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white <?= strpos(current_url(), 'social-links') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/social-links">
                                 <span class="material-symbols-outlined text-lg">share</span>
                                 <p class="text-sm font-medium leading-normal">Social Links</p>
                             </a>
-                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all <?= strpos(current_url(), 'contacts') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/contacts">
+                            <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white <?= strpos(current_url(), 'contacts') !== false ? 'bg-white/10 text-white' : '' ?>" href="/admin/contacts">
                                 <span class="material-symbols-outlined text-lg">mail</span>
                                 <p class="text-sm font-medium leading-normal">Messages</p>
                             </a>
@@ -167,11 +149,11 @@
 
                     <!-- Bottom Actions -->
                     <div class="flex flex-col gap-2">
-                        <button id="theme-toggle" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all">
+                        <button id="theme-toggle" class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white">
                             <span class="material-symbols-outlined text-lg">dark_mode</span>
                             <p class="text-sm font-medium leading-normal">Toggle Theme</p>
                         </button>
-                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-red-500/20 hover:text-red-400 transition-all" href="/admin/logout">
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg text-white/60 hover:bg-red-500/20 hover:text-red-400" href="/admin/logout">
                             <span class="material-symbols-outlined text-lg">logout</span>
                             <p class="text-sm font-medium leading-normal">Logout</p>
                         </a>
@@ -296,19 +278,6 @@ if ($errorFlash): ?>
                     link.classList.add('bg-white/10', 'text-white');
                     link.classList.remove('text-white/60');
                 }
-            });
-
-            // Add animations
-            const elements = document.querySelectorAll('.glassmorphism');
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 100);
             });
         });
 

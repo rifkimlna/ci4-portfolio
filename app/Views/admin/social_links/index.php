@@ -9,7 +9,7 @@
             <p class="text-white/60 mt-1">Kelola tautan media sosial Anda</p>
         </div>
         <div class="flex gap-3">
-            <button onclick="addNewSocialLink()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2">
+            <button type="button" onclick="addNewSocialLink()" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 font-medium flex items-center gap-2">
                 <i class="fas fa-plus"></i>Tambah Baru
             </button>
         </div>
@@ -41,83 +41,91 @@
                 <?= csrf_field() ?>
                 <div class="space-y-6" id="socialLinksContainer">
                     <?php if (!empty($social_links)): ?>
-                        <?php foreach ($social_links as $link): ?>
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start social-link-item border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
-                                <!-- Platform Selection -->
-                                <div class="md:col-span-3">
-                                    <label class="block text-sm font-medium text-white/70 mb-3">Platform</label>
-                                    <select name="links[<?= $link['id'] ?>][platform]" 
-                                            class="w-full px-4 py-3 rounded-lg glassmorphism text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all appearance-none bg-[rgba(255,255,255,0.03)] border border-white/10">
-                                        <option value="GitHub" <?= $link['platform'] === 'GitHub' ? 'selected' : '' ?>>GitHub</option>
-                                        <option value="LinkedIn" <?= $link['platform'] === 'LinkedIn' ? 'selected' : '' ?>>LinkedIn</option>
-                                        <option value="Twitter" <?= $link['platform'] === 'Twitter' ? 'selected' : '' ?>>Twitter</option>
-                                        <option value="Instagram" <?= $link['platform'] === 'Instagram' ? 'selected' : '' ?>>Instagram</option>
-                                        <option value="Facebook" <?= $link['platform'] === 'Facebook' ? 'selected' : '' ?>>Facebook</option>
-                                        <option value="YouTube" <?= $link['platform'] === 'YouTube' ? 'selected' : '' ?>>YouTube</option>
-                                        <option value="Dribbble" <?= $link['platform'] === 'Dribbble' ? 'selected' : '' ?>>Dribbble</option>
-                                        <option value="Behance" <?= $link['platform'] === 'Behance' ? 'selected' : '' ?>>Behance</option>
-                                        <option value="Website" <?= $link['platform'] === 'Website' ? 'selected' : '' ?>>Website</option>
-                                        <option value="Other" <?= !in_array($link['platform'], ['GitHub', 'LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'YouTube', 'Dribbble', 'Behance', 'Website']) ? 'selected' : '' ?>>Lainnya</option>
-                                    </select>
-                                </div>
+                        <?php foreach ($social_links as $index => $link): ?>
+                            <div class="social-link-item bg-white/5 rounded-xl p-4 border border-white/10">
+                                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+                                    <!-- Platform Selection -->
+                                    <div class="md:col-span-4">
+                                        <label class="block text-sm font-medium text-white/70 mb-2">Platform</label>
+                                        <select name="links[<?= $link['id'] ?>][platform]" 
+                                                class="w-full px-3 py-2 rounded-lg bg-black/30 border border-white/20 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500">
+                                            <option value="GitHub" <?= $link['platform'] === 'GitHub' ? 'selected' : '' ?>>GitHub</option>
+                                            <option value="LinkedIn" <?= $link['platform'] === 'LinkedIn' ? 'selected' : '' ?>>LinkedIn</option>
+                                            <option value="Twitter" <?= $link['platform'] === 'Twitter' ? 'selected' : '' ?>>Twitter</option>
+                                            <option value="Instagram" <?= $link['platform'] === 'Instagram' ? 'selected' : '' ?>>Instagram</option>
+                                            <option value="Facebook" <?= $link['platform'] === 'Facebook' ? 'selected' : '' ?>>Facebook</option>
+                                            <option value="YouTube" <?= $link['platform'] === 'YouTube' ? 'selected' : '' ?>>YouTube</option>
+                                            <option value="Dribbble" <?= $link['platform'] === 'Dribbble' ? 'selected' : '' ?>>Dribbble</option>
+                                            <option value="Behance" <?= $link['platform'] === 'Behance' ? 'selected' : '' ?>>Behance</option>
+                                            <option value="Website" <?= $link['platform'] === 'Website' ? 'selected' : '' ?>>Website</option>
+                                            <option value="Other" <?= !in_array($link['platform'], ['GitHub', 'LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'YouTube', 'Dribbble', 'Behance', 'Website']) ? 'selected' : '' ?>>Lainnya</option>
+                                        </select>
+                                    </div>
 
-                                <!-- Custom Platform Name (if Other selected) -->
-                                <div class="md:col-span-2 custom-platform-field" style="<?= !in_array($link['platform'], ['GitHub', 'LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'YouTube', 'Dribbble', 'Behance', 'Website']) ? '' : 'display: none;' ?>">
-                                    <label class="block text-sm font-medium text-white/70 mb-3">Nama Platform</label>
-                                    <input type="text" name="links[<?= $link['id'] ?>][custom_platform]" 
-                                           value="<?= !in_array($link['platform'], ['GitHub', 'LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'YouTube', 'Dribbble', 'Behance', 'Website']) ? $link['platform'] : '' ?>" 
-                                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"
-                                           placeholder="Nama platform">
-                                </div>
+                                    <!-- Custom Platform Name (if Other selected) -->
+                                    <div class="md:col-span-3 custom-platform-field" style="<?= !in_array($link['platform'], ['GitHub', 'LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'YouTube', 'Dribbble', 'Behance', 'Website']) ? '' : 'display: none;' ?>">
+                                        <label class="block text-sm font-medium text-white/70 mb-2">Nama Platform</label>
+                                        <input type="text" name="links[<?= $link['id'] ?>][custom_platform]" 
+                                               value="<?= !in_array($link['platform'], ['GitHub', 'LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'YouTube', 'Dribbble', 'Behance', 'Website']) ? $link['platform'] : '' ?>" 
+                                               class="w-full px-3 py-2 rounded-lg bg-black/30 border border-white/20 text-white placeholder:text-white/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                                               placeholder="Nama platform">
+                                    </div>
 
-                                <!-- URL -->
-                                <div class="md:col-span-5">
-                                    <label class="block text-sm font-medium text-white/70 mb-3">URL</label>
-                                    <input type="url" name="links[<?= $link['id'] ?>][url]" 
-                                           value="<?= $link['url'] ?>" 
-                                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"
-                                           placeholder="https://example.com/yourprofile">
-                                </div>
+                                    <!-- URL -->
+                                    <div class="md:col-span-4">
+                                        <label class="block text-sm font-medium text-white/70 mb-2">URL</label>
+                                        <input type="url" name="links[<?= $link['id'] ?>][url]" 
+                                               value="<?= $link['url'] ?>" 
+                                               class="w-full px-3 py-2 rounded-lg bg-black/30 border border-white/20 text-white placeholder:text-white/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                                               placeholder="https://example.com/yourprofile"
+                                               required>
+                                    </div>
 
-                                <!-- Active Status -->
-                                <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-white/70 mb-3">Status</label>
-                                    <div class="flex items-center gap-3">
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="links[<?= $link['id'] ?>][is_active]" 
-                                                   value="1" <?= $link['is_active'] ? 'checked' : '' ?> 
-                                                   class="sr-only peer">
-                                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-                                        </label>
-                                        <span class="text-sm text-white/60"><?= $link['is_active'] ? 'Aktif' : 'Nonaktif' ?></span>
+                                    <!-- Active Status -->
+                                    <div class="md:col-span-1">
+                                        <label class="block text-sm font-medium text-white/70 mb-2">Status</label>
+                                        <div class="flex items-center justify-center">
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" name="links[<?= $link['id'] ?>][is_active]" 
+                                                       value="1" <?= $link['is_active'] ? 'checked' : '' ?> 
+                                                       class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-
+                                
                                 <!-- Delete Button -->
-                                <div class="md:col-span-12 flex justify-end mt-2">
+                                <div class="flex justify-end mt-3 pt-3 border-t border-white/10">
                                     <button type="button" onclick="deleteSocialLink(this)" 
-                                            class="text-red-400 hover:text-red-300 transition-colors text-sm flex items-center gap-2">
+                                            class="text-red-400 hover:text-red-300 text-sm flex items-center gap-2 px-3 py-1 rounded hover:bg-red-500/10">
                                         <i class="fas fa-trash"></i>Hapus
                                     </button>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <div class="text-center py-8">
+                        <!-- Empty State -->
+                        <div class="text-center py-12">
                             <div class="glassmorphism rounded-full size-20 flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-share-alt text-3xl text-white/60"></i>
                             </div>
                             <h3 class="text-white text-lg font-light mb-2">Belum ada social links</h3>
-                            <p class="text-white/60">Klik "Tambah Baru" untuk menambahkan social link pertama Anda.</p>
+                            <p class="text-white/60 mb-6">Klik "Tambah Baru" untuk menambahkan social link pertama Anda.</p>
+                            <button type="button" onclick="addNewSocialLink()" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 font-medium flex items-center gap-2 mx-auto">
+                                <i class="fas fa-plus"></i>Tambah Link Pertama
+                            </button>
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="mt-8 flex gap-3">
-                    <button type="submit" class="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all font-medium flex items-center gap-2">
-                        <i class="fas fa-save"></i>Update Social Links
+                
+                <!-- Action Buttons -->
+                <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                    <button type="submit" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 font-medium flex items-center justify-center gap-2 flex-1">
+                        <i class="fas fa-save"></i>Simpan Perubahan
                     </button>
-                    <button type="button" onclick="resetForm()" class="glassmorphism text-white px-6 py-3 rounded-lg hover:bg-white/10 transition-colors font-medium flex items-center gap-2">
-                        <i class="fas fa-undo"></i>Reset
+                    <button type="button" onclick="resetForm()" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 font-medium flex items-center justify-center gap-2 flex-1">
+                        <i class="fas fa-undo"></i>Reset Form
                     </button>
                 </div>
             </form>
@@ -128,32 +136,32 @@
     <div class="glassmorphism rounded-2xl p-6">
         <h3 class="text-xl font-light text-white mb-6">Preview Social Links</h3>
         <p class="text-white/60 text-sm mb-4">Hanya link dengan status "Aktif" yang akan ditampilkan</p>
-        <div class="flex flex-wrap gap-4" id="previewContainer">
+        <div class="flex flex-wrap gap-3" id="previewContainer">
             <?php if (!empty($social_links)): ?>
                 <?php foreach ($social_links as $link): ?>
                     <?php if (!empty($link['url']) && $link['is_active']): ?>
                         <a href="<?= $link['url'] ?>" target="_blank" 
-                           class="flex items-center gap-3 px-4 py-3 rounded-lg glassmorphism hover:bg-purple-500/20 transition-colors group border border-transparent hover:border-purple-500/30">
+                           class="flex items-center gap-3 px-4 py-2 rounded-lg bg-white/5 hover:bg-purple-500/20 border border-white/10 hover:border-purple-500/30">
                             <?php if ($link['platform'] === 'LinkedIn'): ?>
-                                <i class="fab fa-linkedin-in text-lg text-purple-400"></i>
+                                <i class="fab fa-linkedin-in text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'GitHub'): ?>
-                                <i class="fab fa-github text-lg text-purple-400"></i>
+                                <i class="fab fa-github text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'Twitter'): ?>
-                                <i class="fab fa-twitter text-lg text-purple-400"></i>
+                                <i class="fab fa-twitter text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'Instagram'): ?>
-                                <i class="fab fa-instagram text-lg text-purple-400"></i>
+                                <i class="fab fa-instagram text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'Facebook'): ?>
-                                <i class="fab fa-facebook text-lg text-purple-400"></i>
+                                <i class="fab fa-facebook text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'YouTube'): ?>
-                                <i class="fab fa-youtube text-lg text-purple-400"></i>
+                                <i class="fab fa-youtube text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'Dribbble'): ?>
-                                <i class="fab fa-dribbble text-lg text-purple-400"></i>
+                                <i class="fab fa-dribbble text-purple-400"></i>
                             <?php elseif ($link['platform'] === 'Behance'): ?>
-                                <i class="fab fa-behance text-lg text-purple-400"></i>
+                                <i class="fab fa-behance text-purple-400"></i>
                             <?php else: ?>
-                                <i class="fas fa-globe text-lg text-purple-400"></i>
+                                <i class="fas fa-globe text-purple-400"></i>
                             <?php endif; ?>
-                            <span class="text-white/80 group-hover:text-white text-sm font-medium"><?= $link['platform'] ?></span>
+                            <span class="text-white/80 text-sm font-medium"><?= $link['platform'] ?></span>
                         </a>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -166,38 +174,8 @@
     </div>
 </div>
 
-<style>
-    .glassmorphism {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    input, select {
-        background: rgba(255, 255, 255, 0.03) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        color: white !important;
-    }
-    
-    input:focus, select:focus {
-        outline: none;
-        border-color: rgba(168, 85, 247, 0.5) !important;
-        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
-    }
-    
-    input::placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
-    }
-    
-    /* Custom checkbox toggle */
-    input[type="checkbox"]:checked ~ .peer-checked\:bg-purple-600 {
-        background-color: #a855f7;
-    }
-</style>
-
 <script>
-    let linkCounter = <?= !empty($social_links) ? count($social_links) : 0 ?>;
+    let newLinkCounter = 0;
 
     // Form submission loading state
     document.getElementById('socialLinksForm').addEventListener('submit', function(e) {
@@ -213,55 +191,58 @@
             const customField = platformField.querySelector('.custom-platform-field');
             const isOther = e.target.value === 'Other';
             
-            customField.style.display = isOther ? 'block' : 'none';
-            if (!isOther) {
-                customField.querySelector('input').value = '';
+            if (customField) {
+                customField.style.display = isOther ? 'block' : 'none';
+                if (!isOther) {
+                    customField.querySelector('input').value = '';
+                }
             }
         }
     });
 
     // Add new social link
     function addNewSocialLink() {
-        linkCounter++;
-        const newId = 'new_' + linkCounter;
+        newLinkCounter++;
+        const newId = 'new_' + newLinkCounter;
         
         const newLinkHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start social-link-item border-b border-white/10 pb-6">
-                <div class="md:col-span-3">
-                    <label class="block text-sm font-medium text-white/70 mb-3">Platform</label>
-                    <select name="links[${newId}][platform]" class="w-full px-4 py-3 rounded-lg glassmorphism text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all">
-                        <option value="GitHub">GitHub</option>
-                        <option value="LinkedIn">LinkedIn</option>
-                        <option value="Twitter">Twitter</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="Facebook">Facebook</option>
-                        <option value="YouTube">YouTube</option>
-                        <option value="Dribbble">Dribbble</option>
-                        <option value="Behance">Behance</option>
-                        <option value="Website">Website</option>
-                        <option value="Other">Lainnya</option>
-                    </select>
-                </div>
-                <div class="md:col-span-2 custom-platform-field" style="display: none;">
-                    <label class="block text-sm font-medium text-white/70 mb-3">Nama Platform</label>
-                    <input type="text" name="links[${newId}][custom_platform]" class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all" placeholder="Nama platform">
-                </div>
-                <div class="md:col-span-5">
-                    <label class="block text-sm font-medium text-white/70 mb-3">URL</label>
-                    <input type="url" name="links[${newId}][url]" class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all" placeholder="https://example.com/yourprofile">
-                </div>
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-white/70 mb-3">Status</label>
-                    <div class="flex items-center gap-3">
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="links[${newId}][is_active]" value="1" checked class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-                        </label>
-                        <span class="text-sm text-white/60">Aktif</span>
+            <div class="social-link-item bg-white/5 rounded-xl p-4 border border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+                    <div class="md:col-span-4">
+                        <label class="block text-sm font-medium text-white/70 mb-2">Platform</label>
+                        <select name="links[${newId}][platform]" class="w-full px-3 py-2 rounded-lg bg-black/30 border border-white/20 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500">
+                            <option value="GitHub">GitHub</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="YouTube">YouTube</option>
+                            <option value="Dribbble">Dribbble</option>
+                            <option value="Behance">Behance</option>
+                            <option value="Website">Website</option>
+                            <option value="Other">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-3 custom-platform-field" style="display: none;">
+                        <label class="block text-sm font-medium text-white/70 mb-2">Nama Platform</label>
+                        <input type="text" name="links[${newId}][custom_platform]" class="w-full px-3 py-2 rounded-lg bg-black/30 border border-white/20 text-white placeholder:text-white/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500" placeholder="Nama platform">
+                    </div>
+                    <div class="md:col-span-4">
+                        <label class="block text-sm font-medium text-white/70 mb-2">URL</label>
+                        <input type="url" name="links[${newId}][url]" class="w-full px-3 py-2 rounded-lg bg-black/30 border border-white/20 text-white placeholder:text-white/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500" placeholder="https://example.com/yourprofile" required>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-sm font-medium text-white/70 mb-2">Status</label>
+                        <div class="flex items-center justify-center">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="links[${newId}][is_active]" value="1" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="md:col-span-12 flex justify-end mt-2">
-                    <button type="button" onclick="deleteSocialLink(this)" class="text-red-400 hover:text-red-300 transition-colors text-sm flex items-center gap-2">
+                <div class="flex justify-end mt-3 pt-3 border-t border-white/10">
+                    <button type="button" onclick="deleteSocialLink(this)" class="text-red-400 hover:text-red-300 text-sm flex items-center gap-2 px-3 py-1 rounded hover:bg-red-500/10">
                         <i class="fas fa-trash"></i>Hapus
                     </button>
                 </div>
@@ -269,53 +250,64 @@
         `;
         
         const container = document.getElementById('socialLinksContainer');
-        if (container.querySelector('.text-center')) {
+        const emptyState = container.querySelector('.text-center');
+        
+        if (emptyState) {
+            // Replace empty state with new link
             container.innerHTML = newLinkHTML;
         } else {
+            // Add new link to existing ones
             container.insertAdjacentHTML('beforeend', newLinkHTML);
+        }
+        
+        // Add event listener for the new platform select
+        const newSelect = container.lastElementChild.querySelector('select[name*="[platform]"]');
+        if (newSelect) {
+            newSelect.addEventListener('change', function() {
+                const platformField = this.closest('.social-link-item');
+                const customField = platformField.querySelector('.custom-platform-field');
+                const isOther = this.value === 'Other';
+                
+                customField.style.display = isOther ? 'block' : 'none';
+                if (!isOther) {
+                    customField.querySelector('input').value = '';
+                }
+            });
         }
     }
 
     // Delete social link
     function deleteSocialLink(button) {
-        const item = button.closest('.social-link-item');
-        item.remove();
-        
-        // Show empty state if no items left
-        const container = document.getElementById('socialLinksContainer');
-        if (container.children.length === 0) {
-            container.innerHTML = `
-                <div class="text-center py-8">
-                    <div class="glassmorphism rounded-full size-20 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-share-alt text-3xl text-white/60"></i>
-                    </div>
-                    <h3 class="text-white text-lg font-light mb-2">Belum ada social links</h3>
-                    <p class="text-white/60">Klik "Tambah Baru" untuk menambahkan social link pertama Anda.</p>
-                </div>
-            `;
+        if (confirm('Apakah Anda yakin ingin menghapus social link ini?')) {
+            const item = button.closest('.social-link-item');
+            if (item) {
+                item.remove();
+                
+                // Show empty state if no items left
+                const container = document.getElementById('socialLinksContainer');
+                if (container.children.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-12">
+                            <div class="glassmorphism rounded-full size-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-share-alt text-3xl text-white/60"></i>
+                            </div>
+                            <h3 class="text-white text-lg font-light mb-2">Belum ada social links</h3>
+                            <p class="text-white/60 mb-6">Klik "Tambah Baru" untuk menambahkan social link pertama Anda.</p>
+                            <button type="button" onclick="addNewSocialLink()" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 font-medium flex items-center gap-2 mx-auto">
+                                <i class="fas fa-plus"></i>Tambah Link Pertama
+                            </button>
+                        </div>
+                    `;
+                }
+            }
         }
     }
 
     // Reset form
     function resetForm() {
-        if (confirm('Yakin ingin mereset semua perubahan?')) {
-            document.getElementById('socialLinksForm').reset();
+        if (confirm('Yakin ingin mereset semua perubahan? Data yang belum disimpan akan hilang.')) {
+            window.location.reload();
         }
     }
-
-    // Add animations
-    document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.glassmorphism');
-        elements.forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    });
 </script>
 <?= $this->endSection() ?>

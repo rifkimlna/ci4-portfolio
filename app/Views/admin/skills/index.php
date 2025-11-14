@@ -8,7 +8,7 @@
             <h1 class="text-2xl lg:text-3xl font-light text-white">Manage Skills</h1>
             <p class="text-white/60 mt-1">Kelola keahlian dan skills yang ditampilkan di portfolio</p>
         </div>
-        <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex items-center gap-2 w-full sm:w-auto justify-center">
+        <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 font-medium flex items-center gap-2 w-full sm:w-auto justify-center">
             <i class="fas fa-plus"></i>
             Tambah Skill
         </button>
@@ -48,7 +48,7 @@
                         </thead>
                         <tbody class="divide-y divide-white/10">
                             <?php foreach ($skills as $skill): ?>
-                                <tr class="hover:bg-white/5 transition-colors">
+                                <tr class="hover:bg-white/5">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm font-medium text-white"><?= $skill['name'] ?></div>
                                     </td>
@@ -94,7 +94,7 @@
                     </div>
                     <h3 class="text-white text-lg font-light mb-2">Belum ada skills</h3>
                     <p class="text-white/60 mb-4">Tambahkan skill pertama Anda untuk ditampilkan di portfolio.</p>
-                    <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex items-center gap-2 mx-auto">
+                    <button onclick="openCreateModal()" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 font-medium flex items-center gap-2 mx-auto">
                         <i class="fas fa-plus"></i>
                         Tambah Skill Pertama
                     </button>
@@ -106,11 +106,11 @@
 
 <!-- Create/Edit Modal -->
 <div id="skillModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden backdrop-blur-sm">
-    <div class="glassmorphism rounded-2xl w-full max-w-md transform transition-all">
+    <div class="glassmorphism rounded-2xl w-full max-w-md">
         <div class="p-6 border-b border-white/10">
             <div class="flex items-center justify-between">
                 <h3 id="modalTitle" class="text-xl font-light text-white">Tambah Skill Baru</h3>
-                <button onclick="closeModal()" class="text-white/60 hover:text-white transition-colors">
+                <button onclick="closeModal()" class="text-white/60 hover:text-white">
                     <i class="fas fa-times text-lg"></i>
                 </button>
             </div>
@@ -124,14 +124,14 @@
                 <div>
                     <label for="name" class="block text-sm font-medium text-white/70 mb-3">Nama Skill</label>
                     <input type="text" id="name" name="name" required 
-                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                           class="w-full px-4 py-3 rounded-lg glassmorphism text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
                            placeholder="Contoh: React.js, Node.js, etc.">
                 </div>
 
                 <div>
                     <label for="category" class="block text-sm font-medium text-white/70 mb-3">Kategori</label>
                     <select id="category" name="category" required 
-                            class="w-full px-4 py-3 rounded-lg glassmorphism text-white focus:outline-none focus:ring-2 focus:ring-white/20 transition-all">
+                            class="w-full px-4 py-3 rounded-lg glassmorphism text-white focus:outline-none focus:ring-2 focus:ring-white/20">
                         <option value="" class="text-white/40">Pilih Kategori</option>
                         <option value="Frontend" class="text-white">Frontend</option>
                         <option value="Backend" class="text-white">Backend</option>
@@ -144,10 +144,10 @@
             </div>
 
             <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                <button type="submit" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                <button type="submit" class="bg-white text-black px-6 py-3 rounded-lg hover:bg-white/90 font-medium flex-1 flex items-center justify-center gap-2">
                     <i class="fas fa-save"></i>Simpan
                 </button>
-                <button type="button" onclick="closeModal()" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors font-medium flex-1 flex items-center justify-center gap-2">
+                <button type="button" onclick="closeModal()" class="bg-white/10 text-white px-6 py-3 rounded-lg hover:bg-white/20 font-medium flex-1 flex items-center justify-center gap-2">
                     <i class="fas fa-times"></i>Batal
                 </button>
             </div>
@@ -239,21 +239,6 @@
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
         submitBtn.disabled = true;
-    });
-
-    // Add animations
-    document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.glassmorphism');
-        elements.forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
     });
 </script>
 <?= $this->endSection() ?>
