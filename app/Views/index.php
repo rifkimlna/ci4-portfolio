@@ -345,9 +345,9 @@
 <body class="bg-background-dark font-display text-white antialiased">
 
     <!-- === SPLINE BACKGROUND === -->
-    <!-- <div id="spline-background">
+    <div id="spline-background">
         <spline-viewer url="https://prod.spline.design/RovNnRi129BxbO8P/scene.splinecode"></spline-viewer>
-    </div> -->
+    </div>
 
     <!-- === KODE AWAL ANDA - TIDAK DIUBAH === -->
     <div class="content-overlay">
@@ -356,7 +356,7 @@
             <div class="nav-container">
                 <div class="logo-compact">
                     <div class="logo-icon">
-                        <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-6 h-6">
+                        <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-10 h-10">
                     </div>
                 </div>
                 
