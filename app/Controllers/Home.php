@@ -6,6 +6,8 @@ use App\Models\ProjectModel;
 use App\Models\SkillModel;
 use App\Models\SocialLinkModel;
 use App\Models\ContactModel;
+use App\Models\EducationModel;
+
 
 class Home extends BaseController
 {
@@ -14,6 +16,7 @@ class Home extends BaseController
     protected $skillModel;
     protected $socialLinkModel;
     protected $contactModel;
+        protected $educationModel; 
 
     public function __construct()
     {
@@ -22,6 +25,7 @@ class Home extends BaseController
         $this->skillModel = new SkillModel();
         $this->socialLinkModel = new SocialLinkModel();
         $this->contactModel = new ContactModel();
+         $this->educationModel = new EducationModel();
     }
 
     public function index()
@@ -30,7 +34,8 @@ class Home extends BaseController
             'site_info' => $this->siteInfoModel->getSiteInfo(),
             'projects' => $this->projectModel->getActiveProjects(),
             'skills' => $this->skillModel->getActiveSkills(),
-            'social_links' => $this->socialLinkModel->getActiveLinks()
+            'social_links' => $this->socialLinkModel->getActiveLinks(),
+             'educations' => $this->educationModel->getActiveEducations()
         ];
 
         return view('index', $data);

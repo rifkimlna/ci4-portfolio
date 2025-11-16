@@ -38,6 +38,13 @@ $routes->group('admin', function($routes) {
         // Site Info
         $routes->get('site-info', 'Admin\SiteInfo::index');
         $routes->post('site-info/update', 'Admin\SiteInfo::update');
+
+
+        // Education Routes - Konsisten dengan Projects
+$routes->get('education', 'Admin\Education::index');
+$routes->post('education/store', 'Admin\Education::store');
+$routes->post('education/update/(:num)', 'Admin\Education::update/$1');
+$routes->delete('education/delete/(:num)', 'Admin\Education::delete/$1');
         
         // Projects
         $routes->get('projects', 'Admin\Projects::index');

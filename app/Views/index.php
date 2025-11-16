@@ -106,7 +106,7 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0,3rem;
         }
         
         .nav-link {
@@ -345,9 +345,9 @@
 <body class="bg-background-dark font-display text-white antialiased">
 
     <!-- === SPLINE BACKGROUND === -->
-    <div id="spline-background">
+    <!-- <div id="spline-background">
         <spline-viewer url="https://prod.spline.design/RovNnRi129BxbO8P/scene.splinecode"></spline-viewer>
-    </div>
+    </div> -->
 
     <!-- === KODE AWAL ANDA - TIDAK DIUBAH === -->
     <div class="content-overlay">
@@ -356,7 +356,7 @@
             <div class="nav-container">
                 <div class="logo-compact">
                     <div class="logo-icon">
-                        <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-10 h-10">
+                        <img src="/assets/icons/logoporto.svg" alt="Logo Portfolio" class="w-7 h-7">
                     </div>
                 </div>
                 
@@ -365,6 +365,7 @@
                     <a href="#proyek" class="nav-link" data-section="proyek">Projects</a>
                     <a href="#tentang" class="nav-link" data-section="tentang">About</a>
                     <a href="#kontak" class="nav-link" data-section="kontak">Contacts</a>
+                       <a href="#pendidikan" class="nav-link" data-section="kontak">Education</a>
                 </div>
                 
                 <a href="#kontak" class="cta-button">Hubungi</a>
@@ -385,6 +386,7 @@
                 <a href="#proyek" class="mobile-nav-link" onclick="closeMobileNav()">Projects</a>
                 <a href="#tentang" class="mobile-nav-link" onclick="closeMobileNav()">About</a>
                 <a href="#kontak" class="mobile-nav-link" onclick="closeMobileNav()">Contacts</a>
+                 <a href="#pendidikan" class="mobile-nav-link" onclick="closeMobileNav()">Education</a>
                 <a href="#kontak" class="cta-button mt-8 inline-block" onclick="closeMobileNav()">Hubungi Saya</a>
             </div>
         </div>
@@ -450,6 +452,81 @@
                     </div>
                 </div>
             </section>
+
+<!-- Section Pendidikan -->
+<section id="pendidikan" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-light text-white mb-4">Pendidikan</h2>
+            <p class="text-white/60 text-lg">Perjalanan akademik dan pengembangan profesional</p>
+        </div>
+
+        <div class="glassmorphism rounded-3xl p-8 md:p-12">
+            <div class="space-y-8">
+                <?php if (!empty($educations)): ?>
+                    <?php foreach ($educations as $education): ?>
+                        <div class="flex gap-6 group">
+                            <!-- Icon -->
+                            <div class="flex-shrink-0">
+                                <div class="size-14 bg-gradient-to-br from-purple-500/20 to-purple-600/30 rounded-2xl flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 transition-colors">
+                                    <i class="fas fa-graduation-cap text-purple-400 text-lg"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="flex-1">
+                                <h3 class="text-xl font-medium text-white mb-2 group-hover:text-purple-300 transition-colors">
+                                    <?= $education['degree'] ?>
+                                </h3>
+                                
+                                <div class="flex items-center gap-4 text-sm text-white/60 mb-3">
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-university text-purple-400 mr-1"></i>
+                                        <?= $education['institution'] ?>
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-calendar text-purple-400 mr-1"></i>
+                                        <?= $education['start_year'] ?>
+                                        <?= $education['end_year'] ? ' - ' . $education['end_year'] : ($education['is_current'] ? ' - Sekarang' : '') ?>
+                                    </span>
+                                </div>
+
+                                <?php if ($education['field_of_study']): ?>
+                                    <p class="text-white/70 mb-3"><?= $education['field_of_study'] ?></p>
+                                <?php endif; ?>
+
+                                <?php if ($education['description']): ?>
+                                    <p class="text-white/60 leading-relaxed mb-3"><?= $education['description'] ?></p>
+                                <?php endif; ?>
+
+                                <?php if ($education['grade']): ?>
+                                    <div class="flex items-center gap-2 text-sm text-white/60 mb-2">
+                                        <i class="fas fa-star text-purple-400"></i>
+                                        <span>Nilai: <?= $education['grade'] ?></span>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($education['activities']): ?>
+                                    <div class="text-sm text-white/50">
+                                        <i class="fas fa-trophy text-purple-400 mr-2"></i>
+                                        <?= $education['activities'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="text-center py-12">
+                        <div class="glassmorphism rounded-full size-20 flex items-center justify-center mx-auto mb-4 border border-purple-500/30">
+                            <i class="fas fa-graduation-cap text-2xl text-purple-400"></i>
+                        </div>
+                        <p class="text-white/60">Riwayat pendidikan akan ditampilkan di sini.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>
 
             <section id="proyek" class="py-20 px-6">
                 <div class="max-w-6xl mx-auto">
